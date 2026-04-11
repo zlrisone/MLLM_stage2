@@ -48,7 +48,7 @@ model:
     freeze: True
   
   projector:
-    type: "linear" # linear, mlp, deepmlp
+    type: "mlp" # linear, mlp, deepmlp
 
   LinearProjector:
     input_dim: 768
