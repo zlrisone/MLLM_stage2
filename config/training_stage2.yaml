@@ -2,8 +2,8 @@
 dataset:
   vision_model_name: "google/siglip2-base-patch16-224"
   qwen_model_name: "Qwen/Qwen2.5-0.5B-Instruct"
-  chat_json_path: "./llava_cc3m_raw/chat.json"
-  image_root: "./llava_cc3m_raw/images"
+  chat_json_path: "./data/llava_cc3m_raw/chat.json"
+  image_root: "./data/llava_cc3m_raw/images"
   batch_size: 128
   num_workers: 2
   max_length: 64
