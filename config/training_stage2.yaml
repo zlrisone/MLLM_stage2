@@ -1,0 +1,87 @@
+# 数据集
+dataset:
+  vision_model_name: "google/siglip2-base-patch16-224"
+  qwen_model_name: "Qwen/Qwen2.5-0.5B-Instruct"
+  chat_json_path: "./llava_cc3m_raw/chat.json"
+  image_root: "./llava_cc3m_raw/images"
+  batch_size: 128
+  num_workers: 2
+  max_length: 64
+  train_ratio: 0.8
+  val_ratio: 0.1
+  test_ratio: 0.1
+
+# 优化器
+optimizer:
+  name: "adamw"
+  lr: 5e-4
+  weight_decay: 0.0
+  betas: [0.9, 0.999]
+
+# 学习率调度
+scheduler:
+  name: "cosine"
+  warmup_steps: 100
+
+# logger
+logging_steps: 10
+project_name: "multimodal-caption"
+run_name: "stage1"
+use_wandb: True
+
+# save
+save_steps: 1000
+save_dir: "./outputs"
+
+# 训练参数
+eval_steps: 500
+epoch: 1
+max_grad_norm: 1.0
+gradient_accumulation_steps: 1
+
+
+
+# 模型配置
+model:
+  vision_encoder:
+    model_name: "google/siglip2-base-patch16-224"
+    freeze: True
+  
+  projector:
+    type: "linear" # linear, mlp, deepmlp
+
+  LinearProjector:
+    input_dim: 768
+    output_dim: 2048
+  
+  MLPProjector:
+    input_dim: 768
+    hidden_dim: 1536
+    output_dim: 2048
+    activation: "gelu"
+    dropout: 0.05
+  
+  DeepMLPProjector:
+    input_dim: 768
+    hidden_dim: 1536
+    output_dim: 2048
+    dropout: 0.05
+
+  llm:
+    model_name: "Qwen/Qwen2.5-3B"
+    freeze: True
+    use_lora: False
+    image_pad_id: 151655
+  
+  lora:
+    r: 16
+    alpha: 32
+    dropout: 0.05
+    target_modules: ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+    lora_layers: 16  # 最后16层应用LoRA
+
+# 生成
+generation:
+  max_new_tokens: 64
+  num_beams: 1
+  do_sample: False

@@ -1,0 +1,8 @@
+wandb
+torch
+transformers
+pyyaml
+peft
+datasets
+pycocoevalcap
+nltk
