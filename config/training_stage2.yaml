@@ -6,7 +6,7 @@ dataset:
   image_root: "./data/llava_cc3m_raw/images"
   batch_size: 128
   num_workers: 2
-  max_length: 64
+  max_length: 512
   train_ratio: 0.8
   val_ratio: 0.1
   test_ratio: 0.1
@@ -14,7 +14,7 @@ dataset:
 # 优化器
 optimizer:
   name: "adamw"
-  lr: 5e-4
+  lr: 0.001
   weight_decay: 0.0
   betas: [0.9, 0.999]
 
@@ -35,7 +35,7 @@ save_dir: "./outputs"
 
 # 训练参数
 eval_steps: 500
-epoch: 1
+epochs: 1
 max_grad_norm: 1.0
 gradient_accumulation_steps: 1
 
@@ -52,19 +52,16 @@ model:
 
   LinearProjector:
     input_dim: 768
-    output_dim: 2048
   
   MLPProjector:
     input_dim: 768
     hidden_dim: 1536
-    output_dim: 2048
     activation: "gelu"
     dropout: 0.05
   
   DeepMLPProjector:
     input_dim: 768
     hidden_dim: 1536
-    output_dim: 2048
     dropout: 0.05
 
   llm:
@@ -82,6 +79,6 @@ model:
 
 # 生成
 generation:
-  max_new_tokens: 64
+  max_new_tokens: 512
   num_beams: 1
   do_sample: False
