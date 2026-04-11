@@ -68,7 +68,7 @@ model:
     dropout: 0.05
 
   llm:
-    model_name: "Qwen/Qwen2.5-3B"
+    model_name: "Qwen/Qwen2.5-0.5B-Instruct"
     freeze: True
     use_lora: False
     image_pad_id: 151655
