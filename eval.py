@@ -81,7 +81,7 @@ def evaluate_generation(
         gen_only_ids = generated_ids[:, prompt_len:]
         # decode 生成结果
         pred_texts = tokenizer.batch_decode(
-            gen_only_ids,
+            generated_ids,
             skip_special_tokens=True,
             clean_up_tokenization_spaces=True,
         )

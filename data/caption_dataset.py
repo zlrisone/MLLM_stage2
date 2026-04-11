@@ -21,29 +21,15 @@ class CaptionDataset(Dataset):
 
     def _build_prompt(self, conversations):
         system_prompt = "<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n"
-        prompt = system_prompt
-        full_text = system_prompt
-        caption = ""
-        for i, conv in enumerate(conversations):
-            role = conv["from"]
-            value = conv["value"]
-
-            value = value.replace(
+        question = conversations[0]["value"].replace(
                 "<image>",
                 "<|vision_start|><|image_pad|><|vision_end|>"
             )
+        caption = conversations[1]["value"].strip()
+        prompt = f"{system_prompt}<|im_start|>user\n{question}<|im_end|>\n<|im_start|>assitant\n"
+        full_text = f"{prompt}{caption}<|im_end|>"
 
-            role = "user" if role == "human" else "assistant"
-            text = f"\n<|im_start|>{role}\n{value}<|im_end|>"
-
-            if i == len(conversations) - 1 and role == "assistant":
-                full_text += text
-                caption += value
-            else:
-                prompt += text
-                full_text += text
-
-        return prompt, full_text,caption
+        return prompt, full_text, caption
 
     def __getitem__(self, idx):
         item = self.dataset[idx]
@@ -212,8 +198,8 @@ if __name__=="__main__":
         tokenizer.pad_token = tokenizer.eos_token
 
     dataset = CaptionDataset(
-        chat_json_path="../../llava_cc3m_raw/chat.json",
-        image_root="../../llava_cc3m_raw/images",
+        chat_json_path="../llava_cc3m_raw/chat.json",
+        image_root="../llava_cc3m_raw/images",
         processor=processor,
         tokenizer=tokenizer,
         max_length=512,
@@ -229,4 +215,4 @@ if __name__=="__main__":
 
     batch = next(iter(train_loader))
     for k, v in batch.items():
-        print(k, v.shape)
+        print(f"{k}:{v}")

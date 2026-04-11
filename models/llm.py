@@ -28,7 +28,7 @@ class QwenDecoder(nn.Module):
         # 加载预训练模型
         self.model = AutoModelForCausalLM.from_pretrained(
             self.model_name,
-            torch_dtype=torch.bfloat16,
+            torch_dtype=torch.float32,
             device_map = None,
             trust_remote_code=True,
         )
@@ -140,25 +140,57 @@ class QwenDecoder(nn.Module):
             self.use_lora = False
             
 if __name__=="__main__":
-    model_name = "Qwen/Qwen2.5-3B"
+    model_name = "Qwen/Qwen2.5-0.5B-Instruct"
     model = QwenDecoder(model_name)
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
-    print(tokenizer.additional_special_tokens)
-    print(tokenizer.additional_special_tokens_ids)
+    # print(tokenizer.additional_special_tokens)
+    # print(tokenizer.additional_special_tokens_ids)
     # prepare the model input
     
-#     prompt = "Describe this photo.<|vision_start|><|image_pad|><|vision_end|>"
-#     messages = [
-#         {"role": "user", "content": prompt}
-#     ]
-#     text = tokenizer.apply_chat_template(
-#         messages,
-#         tokenize=False,
-#         add_generation_prompt=True,
-#     )
+    prompt = "Describe this photo.<|vision_start|><|image_pad|><|vision_end|>"
+    messages = [
+        {"role": "user", "content": prompt}
+    ]
+    text = tokenizer.apply_chat_template(
+        messages,
+        tokenize=False,
+        add_generation_prompt=True,
+    )
+    print(text)
+    text = """<|im_start|>system
+You are a helpful assistant.<|im_end|>
+<|im_start|>user
+Describe this photo.<|vision_start|><|image_pad|><|vision_end|><|im_end|>
+<|im_start|>assistant\n"""
+    print(text)
+    model_inputs = tokenizer([text], return_tensors="pt")
+    text_embeddings = model.model.get_input_embeddings()(model_inputs.input_ids)
+    print(text_embeddings.shape)
+
+    projected_features = torch.ones(1,196,896)
+    print(projected_features.shape)
+
+    input_embeddings = torch.cat([text_embeddings,projected_features], dim=1)
+    print(input_embeddings.shape)
+    generated_ids = model.model.generate(
+        inputs_embeds=input_embeddings,
+        max_new_tokens=512
+    )
+    print(generated_ids.shape)
+
+    # generated_ids = [
+    #     output_ids[len(input_ids):] for input_ids, output_ids in zip(model_inputs.input_ids, generated_ids)
+    # ]
+    inputs = tokenizer.batch_decode(model_inputs.input_ids, skip_special_tokens=False)[0]
+    print('-----------')
+    print(inputs)
+    response = tokenizer.batch_decode(generated_ids, skip_special_tokens=False)[0]
+    print('-----------')
+    
+    print(response)
 #     prompt = """<|im_start|>system
 # You are a helpful assistant.<|im_end|>
 # <|im_start|>user

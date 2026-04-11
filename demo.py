@@ -3,6 +3,7 @@ from tqdm import tqdm
 from typing import Optional
 import argparse
 import yaml
+from transformers import AutoTokenizer
 
 from utils.checkpoint import load_checkpoint
 from models.multimodal_model import create_multimodal_model
@@ -53,7 +54,7 @@ def demo_caption_generation(
         )
         gen_only_ids = generated_ids[:, prompt_len:]
         pred_texts = tokenizer.batch_decode(
-            gen_only_ids,
+            generated_ids,
             skip_special_tokens=True,
             clean_up_tokenization_spaces=True,
         )
@@ -160,7 +161,7 @@ def main():
     else:
         dataloader = test_loader
 
-    tokenizer = model.llm_decoder.tokenizer
+    tokenizer = AutoTokenizer.from_pretrained(config["dataset"]["qwen_model_name"], use_fast=True)
 
     demo_caption_generation(
         model=model,

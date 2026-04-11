@@ -299,7 +299,7 @@ def train(model: nn.Module, train_loader : DataLoader, val_loader : DataLoader,
 
 def main():
     parser = argparse.ArgumentParser(description="Stage 1 Training: Alignment")
-    parser.add_argument("--config", type=str, default="./config/training_stage1.yaml",
+    parser.add_argument("--config", type=str, default="./config/training_stage2.yaml",
                        help="Path to config file")
     parser.add_argument("--resume", type=str, default=None,
                        help="Resume from checkpoint")
