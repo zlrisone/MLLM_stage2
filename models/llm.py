@@ -28,7 +28,7 @@ class QwenDecoder(nn.Module):
         # 加载预训练模型
         self.model = AutoModelForCausalLM.from_pretrained(
             self.model_name,
-            torch_dtype=torch.float32,
+            torch_dtype=torch.float16,
             device_map = None,
             trust_remote_code=True,
         )

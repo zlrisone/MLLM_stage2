@@ -223,10 +223,10 @@ class MultimodalModel(nn.Module):
         
         # 3. 准备输入序列
         text_embeddings = self.llm_decoder.model.get_input_embeddings()(input_ids)  # (B, seq_len, H)
-        # projected_features = projected_features.to(
-        #     device=text_embeddings.device,
-        #     dtype=text_embeddings.dtype
-        # )
+        projected_features = projected_features.to(
+            device=text_embeddings.device,
+            dtype=text_embeddings.dtype
+        )
         # 找到图像token的位置并替换
         combined_embeddings = self._combine_vision_text_embeddings(
             projected_features, text_embeddings, input_ids
@@ -281,10 +281,10 @@ class MultimodalModel(nn.Module):
 
         # 3. 文本 embedding
         text_embeddings = self.llm_decoder.model.get_input_embeddings()(input_ids)  # [B, L, H]
-        # projected_features = projected_features.to(
-        #     device=text_embeddings.device,
-        #     dtype=text_embeddings.dtype
-        # )
+        projected_features = projected_features.to(
+            device=text_embeddings.device,
+            dtype=text_embeddings.dtype
+        )
         # 4. 用视觉 token 替换 <|image_pad|>
         combined_embeddings = self._combine_vision_text_embeddings(
             projected_features, text_embeddings, input_ids
