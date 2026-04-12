@@ -145,7 +145,7 @@ def main():
     model = create_multimodal_model(config)
     model.to(device)
 
-    load_checkpoint(args.checkpoint, model, device)
+    load_checkpoint(args.checkpoint, model)
 
     train_loader, val_loader, test_loader = build_dataloders(
         vision_model_name=config["dataset"]["vision_model_name"],
