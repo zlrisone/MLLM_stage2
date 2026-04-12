@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
+from transformers import AutoTokenizer
 
 from models.multimodal_model import create_multimodal_model
 from data.caption_dataset import build_dataloders
@@ -377,7 +378,7 @@ def main():
     print(f"Training finished. Best val loss: {best_val_loss:.6f}")
 
     # ===== 测试集 caption 评估 =====
-    tokenizer = model.llm_decoder.tokenizer
+    tokenizer = AutoTokenizer.from_pretrained(config["dataset"]["qwen_model_name"], use_fast=True)
 
     test_metrics = evaluate_generation(
         model=model,

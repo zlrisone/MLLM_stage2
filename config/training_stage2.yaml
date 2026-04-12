@@ -4,7 +4,7 @@ dataset:
   qwen_model_name: "Qwen/Qwen2.5-0.5B-Instruct"
   chat_json_path: "./data/llava_cc3m_raw/chat.json"
   image_root: "./data/llava_cc3m_raw/images"
-  batch_size: 128
+  batch_size: 16
   num_workers: 2
   max_length: 512
   train_ratio: 0.8
@@ -48,7 +48,7 @@ model:
     freeze: True
   
   projector:
-    type: "mlp" # linear, mlp, deepmlp
+    type: "deepmlp" # linear, mlp, deepmlp
 
   LinearProjector:
     input_dim: 768

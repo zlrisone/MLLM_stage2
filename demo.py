@@ -59,7 +59,11 @@ def demo_caption_generation(
             clean_up_tokenization_spaces=True,
         )
         pred_texts = [x.strip() for x in pred_texts]
-
+        question = tokenizer.batch_decode(
+            input_ids,
+            skip_special_tokens=True,
+            clean_up_tokenization_spaces=True,
+        ) 
         # 兼容常见参考字段
         if "references" in batch:
             refs = batch["references"]
@@ -72,6 +76,8 @@ def demo_caption_generation(
         for i in range(bs):
             print("=" * 80)
             print(f"Sample #{shown}")
+            print("Question:")
+            print(question[i])
             print("-" * 80)
             print("Reference:")
             print(refs[i])

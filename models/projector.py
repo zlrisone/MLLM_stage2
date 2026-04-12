@@ -134,7 +134,7 @@ class DeepMLPProjector(nn.Module):
         self.input_dim = input_dim
         self.hidden_dim = hidden_dim
         self.output_dim = output_dim
-
+        self.in_norm = nn.LayerNorm(input_dim)
         self.net = nn.Sequential(
             nn.Linear(input_dim, hidden_dim),
             nn.GELU(),
@@ -146,6 +146,7 @@ class DeepMLPProjector(nn.Module):
 
             nn.Linear(hidden_dim, output_dim)
         )
+        self.out_norm = nn.LayerNorm(output_dim)
 
         self._init_weights()
 
@@ -158,10 +159,92 @@ class DeepMLPProjector(nn.Module):
 
     def forward(self, x):
         if x.size(-1) != self.input_dim:
+            raise ValueError(f"Expected last dim {self.input_dim}, got {x.size(-1)}")
+        x = self.in_norm(x)
+        x = self.net(x)
+        x = self.out_norm(x)
+        return x
+    def get_trainable_params(self) -> int:
+        return sum(p.numel() for p in self.parameters() if p.requires_grad)
+
+class ResidualMLPBlock(nn.Module):
+    def __init__(self, dim: int, mlp_ratio: float = 4.0, dropout: float = 0.0):
+        super().__init__()
+        hidden_dim = int(dim * mlp_ratio)
+
+        self.norm = nn.LayerNorm(dim)
+        self.fc1 = nn.Linear(dim, hidden_dim)
+        self.act = nn.GELU()
+        self.fc2 = nn.Linear(hidden_dim, dim)
+        self.dropout = nn.Dropout(dropout)
+
+        self._init_weights()
+
+    def _init_weights(self):
+        nn.init.normal_(self.fc1.weight, mean=0.0, std=0.02)
+        nn.init.zeros_(self.fc1.bias)
+        nn.init.normal_(self.fc2.weight, mean=0.0, std=0.02)
+        nn.init.zeros_(self.fc2.bias)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        residual = x
+        x = self.norm(x)
+        x = self.fc1(x)
+        x = self.act(x)
+        x = self.dropout(x)
+        x = self.fc2(x)
+        x = self.dropout(x)
+        return residual + x
+class ResidualMLPProjector(nn.Module):
+    def __init__(
+        self,
+        input_dim: int = 768,
+        output_dim: int = 2048,
+        num_blocks: int = 2,
+        mlp_ratio: float = 4.0,
+        dropout: float = 0.0,
+    ):
+        super().__init__()
+
+        self.input_dim = input_dim
+        self.output_dim = output_dim
+        self.num_blocks = num_blocks
+
+        self.input_norm = nn.LayerNorm(input_dim)
+        self.input_proj = nn.Linear(input_dim, output_dim)
+
+        self.blocks = nn.ModuleList([
+            ResidualMLPBlock(
+                dim=output_dim,
+                mlp_ratio=mlp_ratio,
+                dropout=dropout,
+            )
+            for _ in range(num_blocks)
+        ])
+
+        self.output_norm = nn.LayerNorm(output_dim)
+
+        self._init_weights()
+
+    def _init_weights(self):
+        nn.init.normal_(self.input_proj.weight, mean=0.0, std=0.02)
+        nn.init.zeros_(self.input_proj.bias)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        if x.size(-1) != self.input_dim:
             raise ValueError(
                 f"Expected last dim {self.input_dim}, got {x.size(-1)}"
             )
-        return self.net(x)
+
+        x = self.input_norm(x)
+        x = self.input_proj(x)
+
+        for block in self.blocks:
+            x = block(x)
+
+        x = self.output_norm(x)
+        return x
+
     def get_trainable_params(self) -> int:
         return sum(p.numel() for p in self.parameters() if p.requires_grad)
 if __name__ == "__main__":

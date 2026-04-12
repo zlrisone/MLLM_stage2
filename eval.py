@@ -6,9 +6,16 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from tqdm import tqdm
+from transformers import AutoTokenizer
 
 from utils.LM_metrics import evaluate_caption
+from models.multimodal_model import create_multimodal_model
+from data.caption_dataset import build_dataloders
+from utils.checkpoint import ensure_dir, save_checkpoint, load_checkpoint
 
+import argparse
+import yaml
+import os
 @torch.no_grad()
 def evaluate_generation(
     model: nn.Module,
@@ -157,3 +164,51 @@ def print_caption_metrics(metrics: Dict[str, Any], prefix: str = "Eval"):
         if k in metrics:
             msg.append(f"{k}={metrics[k]:.4f}")
     print(" | ".join(msg))
+
+if __name__=="__main__":
+    parser = argparse.ArgumentParser(description="Stage 1 Training: Alignment")
+    parser.add_argument("--config", type=str, default="./config/training_stage2.yaml",
+                       help="Path to config file")
+    parser.add_argument("--resume", type=str, default="",
+                       help="Resume from checkpoint")
+    args = parser.parse_args()
+    # 加载配置
+    with open(args.config, 'r') as f:
+        config = yaml.safe_load(f)
+   
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print(f"Using device: {device}")
+
+    # 创建模型
+    model = create_multimodal_model(config)
+    model.to(device)
+
+    train_loader,val_loader,test_loader = build_dataloders(
+        vision_model_name=config["dataset"]["vision_model_name"],
+        qwen_model_name=config["dataset"]["qwen_model_name"],
+        chat_json_path=config["dataset"]["chat_json_path"],
+        image_root=config["dataset"]["image_root"],
+        batch_size=config["dataset"]["batch_size"],
+        num_workers=config["dataset"]["num_workers"],
+        max_length=config["dataset"]["max_length"],
+        train_ratio=config["dataset"]["train_ratio"],
+        val_ratio=config["dataset"]["val_ratio"],
+        test_ratio=config["dataset"]["test_ratio"]
+    )
+    checkpoint = load_checkpoint(args.resume, model)
+
+    tokenizer = AutoTokenizer.from_pretrained(config["dataset"]["qwen_model_name"], use_fast=True)
+
+    test_metrics = evaluate_generation(
+        model=model,
+        dataloader=test_loader,
+        tokenizer=tokenizer,
+        device=device,
+        max_new_tokens=config.get("generation", {}).get("max_new_tokens", 64),
+        num_beams=config.get("generation", {}).get("num_beams", 1),
+        do_sample=config.get("generation", {}).get("do_sample", False),
+        save_json_path=os.path.join(config.get("save_dir", "./outputs"), "test_predictions.json"),
+        log_to_wandb=config.get("use_wandb", True),
+        prefix="test",
+    )
+    print_caption_metrics(test_metrics, prefix="Test")

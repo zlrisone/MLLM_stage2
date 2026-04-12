@@ -7,7 +7,7 @@ import random
 from transformers import AutoProcessor, AutoTokenizer
 
 class CaptionDataset(Dataset):
-    def __init__(self, chat_json_path, image_root, processor, tokenizer, max_length=512):
+    def __init__(self, chat_json_path, image_root, processor, tokenizer, max_length=512,mode="train"):
         with open(chat_json_path, "r", encoding="utf-8") as f:
             self.dataset = json.load(f)
 
@@ -15,7 +15,7 @@ class CaptionDataset(Dataset):
         self.processor = processor
         self.tokenizer = tokenizer
         self.max_length = max_length
-
+        self.mode = mode
     def __len__(self):
         return len(self.dataset)
 
@@ -26,7 +26,7 @@ class CaptionDataset(Dataset):
                 "<|vision_start|><|image_pad|><|vision_end|>"
             )
         caption = conversations[1]["value"].strip()
-        prompt = f"{system_prompt}<|im_start|>user\n{question}<|im_end|>\n<|im_start|>assitant\n"
+        prompt = f"{system_prompt}<|im_start|>user\n{question}<|im_end|>\n<|im_start|>assistant\n"
         full_text = f"{prompt}{caption}<|im_end|>"
 
         return prompt, full_text, caption
@@ -63,9 +63,13 @@ class CaptionDataset(Dataset):
             padding=False,
             return_tensors="pt"
         )
-
-        input_ids = full_enc["input_ids"].squeeze(0)
-        attention_mask = full_enc["attention_mask"].squeeze(0)
+        
+        if self.mode == "train":
+            input_ids = full_enc["input_ids"].squeeze(0)
+            attention_mask = full_enc["attention_mask"].squeeze(0)
+        else:
+            input_ids = prompt_enc["input_ids"].squeeze(0)
+            attention_mask = prompt_enc["attention_mask"].squeeze(0)
         prompt_len = prompt_enc["input_ids"].size(1)
 
         return {
@@ -73,7 +77,8 @@ class CaptionDataset(Dataset):
             "input_ids": input_ids,
             "attention_mask": attention_mask,
             "prompt_len": prompt_len,
-            "reference":caption
+            "reference":caption,
+            "image_path":image_path
         }
 
 def split_dataset(dataset, train_ratio=0.8, val_ratio=0.1, test_ratio=0.1, seed=42):
@@ -174,15 +179,38 @@ def build_dataloders(
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
     
-    dataset = CaptionDataset(
+    train_dataset = CaptionDataset(
         chat_json_path=chat_json_path,
         image_root=image_root,
         processor=processor,
         tokenizer=tokenizer,
-        max_length=max_length
+        max_length=max_length,
+        mode="train"
     )
 
-    train_ds, val_ds, test_ds = split_dataset(dataset, train_ratio, val_ratio, test_ratio, seed=42)
+    eval_dataset = CaptionDataset(
+        chat_json_path=chat_json_path,
+        image_root=image_root,
+        processor=processor,
+        tokenizer=tokenizer,
+        max_length=max_length,
+        mode="eval"
+    )
+    n = len(train_dataset)
+    indices = list(range(n))
+    random.seed(42)
+    random.shuffle(indices)
+
+    train_end = int(n * train_ratio)
+    val_end = train_end + int(n * val_ratio)
+    train_idx = indices[:train_end]
+    val_idx = indices[train_end:val_end]
+    test_idx = indices[val_end:]
+
+    train_ds = Subset(train_dataset, train_idx)
+    val_ds = Subset(train_dataset, val_idx)
+    test_ds = Subset(eval_dataset, test_idx)
+
     collator = MultiModalCollator(tokenizer, max_length=max_length)
     
     train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True, collate_fn=collator, num_workers=num_workers)
@@ -198,8 +226,8 @@ if __name__=="__main__":
         tokenizer.pad_token = tokenizer.eos_token
 
     dataset = CaptionDataset(
-        chat_json_path="../llava_cc3m_raw/chat.json",
-        image_root="../llava_cc3m_raw/images",
+        chat_json_path="../../llava_cc3m_raw/chat.json",
+        image_root="../../llava_cc3m_raw/images",
         processor=processor,
         tokenizer=tokenizer,
         max_length=512,
@@ -213,6 +241,10 @@ if __name__=="__main__":
     val_loader = DataLoader(val_ds, batch_size=8, shuffle=False, collate_fn=collator, num_workers=4)
     test_loader = DataLoader(test_ds, batch_size=8, shuffle=False, collate_fn=collator, num_workers=4)
 
-    batch = next(iter(train_loader))
-    for k, v in batch.items():
-        print(f"{k}:{v}")
+    for i in range(10):
+        sample = test_ds[i]
+        print(f"\n=== sample {i} ===")
+        reference = sample["reference"]
+        image_path = sample["image_path"]
+        print(f"reference: {reference}")
+        print(f"image_path: {image_path}")
