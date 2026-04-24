@@ -99,9 +99,17 @@ def split_dataset(dataset, train_ratio=0.8, val_ratio=0.1, test_ratio=0.1, seed=
     return Subset(dataset, train_idx), Subset(dataset, val_idx), Subset(dataset, test_idx)
 
 class MultiModalCollator:
-    def __init__(self, tokenizer, max_length=None):
+    def __init__(self, tokenizer, max_length=None, padding_side: str = "right"):
+        """
+        padding_side:
+            - "right"：训练/计算 loss 时使用，labels 用右 padding 对齐。
+            - "left" ：batch 生成时必须使用，否则 causal LM 的新 token 会被追加到 pad 之后，
+                       导致短 prompt 的样本产出乱码（常见现象：prompt tail 泄漏，比如输出里冒出 "assistant"）。
+        """
+        assert padding_side in ("right", "left")
         self.tokenizer = tokenizer
         self.max_length = max_length
+        self.padding_side = padding_side
 
         if self.tokenizer.pad_token_id is None:
             self.tokenizer.pad_token = self.tokenizer.eos_token
@@ -132,23 +140,21 @@ class MultiModalCollator:
             seq_len = input_ids.size(0)
             pad_len = max_seq_len - seq_len
 
-            padded_ids = torch.cat([
-                input_ids,
-                torch.full((pad_len,), pad_token_id, dtype=input_ids.dtype)
-            ])
+            pad_ids = torch.full((pad_len,), pad_token_id, dtype=input_ids.dtype)
+            pad_mask = torch.zeros(pad_len, dtype=attention_mask.dtype)
+            pad_labels = torch.full((pad_len,), -100, dtype=input_ids.dtype)
 
-            padded_mask = torch.cat([
-                attention_mask,
-                torch.zeros(pad_len, dtype=attention_mask.dtype)
-            ])
+            labels_core = input_ids.clone()
+            labels_core[:prompt_len] = -100
 
-            labels = input_ids.clone()
-            labels[:prompt_len] = -100
-            if pad_len > 0:
-                labels = torch.cat([
-                    labels,
-                    torch.full((pad_len,), -100, dtype=labels.dtype)
-                ])
+            if self.padding_side == "right":
+                padded_ids = torch.cat([input_ids, pad_ids])
+                padded_mask = torch.cat([attention_mask, pad_mask])
+                labels = torch.cat([labels_core, pad_labels]) if pad_len > 0 else labels_core
+            else:  # left padding —— 生成专用
+                padded_ids = torch.cat([pad_ids, input_ids])
+                padded_mask = torch.cat([pad_mask, attention_mask])
+                labels = torch.cat([pad_labels, labels_core]) if pad_len > 0 else labels_core
 
             padded_input_ids.append(padded_ids)
             padded_attention_mask.append(padded_mask)
@@ -211,11 +217,25 @@ def build_dataloders(
     val_ds = Subset(train_dataset, val_idx)
     test_ds = Subset(eval_dataset, test_idx)
 
-    collator = MultiModalCollator(tokenizer, max_length=max_length)
-    
-    train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True, collate_fn=collator, num_workers=num_workers)
-    val_loader = DataLoader(val_ds, batch_size=batch_size, shuffle=False, collate_fn=collator, num_workers=num_workers)
-    test_loader = DataLoader(test_ds, batch_size=batch_size, shuffle=False, collate_fn=collator, num_workers=num_workers)
+    # 训练/算 loss 用右 padding；生成用左 padding（否则 batch 生成会产出乱码）
+    train_collator = MultiModalCollator(tokenizer, max_length=max_length, padding_side="right")
+    eval_collator = MultiModalCollator(tokenizer, max_length=max_length, padding_side="left")
+
+    pin_memory = torch.cuda.is_available()
+    persistent = num_workers > 0
+
+    train_loader = DataLoader(
+        train_ds, batch_size=batch_size, shuffle=True, collate_fn=train_collator,
+        num_workers=num_workers, pin_memory=pin_memory, persistent_workers=persistent,
+    )
+    val_loader = DataLoader(
+        val_ds, batch_size=batch_size, shuffle=False, collate_fn=train_collator,
+        num_workers=num_workers, pin_memory=pin_memory, persistent_workers=persistent,
+    )
+    test_loader = DataLoader(
+        test_ds, batch_size=batch_size, shuffle=False, collate_fn=eval_collator,
+        num_workers=num_workers, pin_memory=pin_memory, persistent_workers=persistent,
+    )
     return train_loader,val_loader,test_loader
     
 if __name__=="__main__":

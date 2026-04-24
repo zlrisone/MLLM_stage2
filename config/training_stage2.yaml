@@ -4,7 +4,7 @@ dataset:
   qwen_model_name: "Qwen/Qwen2.5-0.5B-Instruct"
   chat_json_path: "./data/llava_cc3m_raw/chat.json"
   image_root: "./data/llava_cc3m_raw/images"
-  batch_size: 16
+  batch_size: 512
   num_workers: 2
   max_length: 512
   train_ratio: 0.8
@@ -27,7 +27,7 @@ scheduler:
 logging_steps: 10
 project_name: "multimodal-caption"
 run_name: "stage1"
-use_wandb: True
+use_wandb: False
 
 # save
 save_steps: 1000
@@ -79,6 +79,12 @@ model:
 
 # 生成
 generation:
-  max_new_tokens: 512
+  max_new_tokens: 64
   num_beams: 1
   do_sample: False
+
+eval:
+  batch_size: 64
+  num_workers: 4
+  dtype: "fp32"       # fp32 / fp16 / bf16
+  limit_batches: 0    # 0 表示跑全量；>0 表示只跑前 N 个 batch 做快速检查

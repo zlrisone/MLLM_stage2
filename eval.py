@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 from typing import List, Dict, Any, Union, Optional
+from contextlib import nullcontext
 
 import torch
 import torch.nn as nn
@@ -16,7 +17,27 @@ from utils.checkpoint import ensure_dir, save_checkpoint, load_checkpoint
 import argparse
 import yaml
 import os
-@torch.no_grad()
+
+
+_DTYPE_MAP = {
+    "fp32": torch.float32,
+    "float32": torch.float32,
+    "fp16": torch.float16,
+    "float16": torch.float16,
+    "bf16": torch.bfloat16,
+    "bfloat16": torch.bfloat16,
+}
+
+
+def _resolve_dtype(name: str, device: torch.device) -> torch.dtype:
+    dtype = _DTYPE_MAP.get(str(name).lower(), torch.float32)
+    # 半精度只在 GPU 上有意义
+    if device.type != "cuda" and dtype != torch.float32:
+        return torch.float32
+    return dtype
+
+
+@torch.inference_mode()
 def evaluate_generation(
     model: nn.Module,
     dataloader: DataLoader,
@@ -28,6 +49,8 @@ def evaluate_generation(
     save_json_path: Optional[str] = None,
     log_to_wandb: bool = False,
     prefix: str = "test",
+    amp_dtype: Optional[torch.dtype] = None,
+    limit_batches: int = 0,
 ) -> Dict[str, Any]:
     """
     基于生成结果做 caption 评估。
@@ -71,22 +94,30 @@ def evaluate_generation(
         dynamic_ncols=True,
     )
 
+    # 仅在 GPU + 半精度时启用 autocast
+    use_amp = (device.type == "cuda") and (amp_dtype is not None) and (amp_dtype != torch.float32)
+    amp_ctx = torch.autocast(device_type="cuda", dtype=amp_dtype) if use_amp else nullcontext()
+
     for batch_idx, batch in enumerate(pbar):
+        if limit_batches and batch_idx >= limit_batches:
+            break
+
         pixel_values = batch["pixel_values"].to(device, non_blocking=True)
         input_ids = batch["input_ids"].to(device, non_blocking=True)
         attention_mask = batch["attention_mask"].to(device, non_blocking=True)
 
-        generated_ids,prompt_len = model.generate(
-            pixel_values=pixel_values,
-            input_ids=input_ids,
-            attention_mask=attention_mask,
-            max_new_tokens=max_new_tokens,
-            num_beams=num_beams,
-            do_sample=do_sample,
-            return_prompt_length=True,
-        )
-        gen_only_ids = generated_ids[:, prompt_len:]
-        # decode 生成结果
+        with amp_ctx:
+            generated_ids = model.generate(
+                pixel_values=pixel_values,
+                input_ids=input_ids,
+                attention_mask=attention_mask,
+                max_new_tokens=max_new_tokens,
+                num_beams=num_beams,
+                do_sample=do_sample,
+                use_cache=True,
+            )
+
+        # 用 inputs_embeds 调 generate 时，HF 返回的就是新生成部分，直接 decode 即可
         pred_texts = tokenizer.batch_decode(
             generated_ids,
             skip_special_tokens=True,
@@ -166,34 +197,49 @@ def print_caption_metrics(metrics: Dict[str, Any], prefix: str = "Eval"):
     print(" | ".join(msg))
 
 if __name__=="__main__":
-    parser = argparse.ArgumentParser(description="Stage 1 Training: Alignment")
+    parser = argparse.ArgumentParser(description="Stage 2 Evaluation")
     parser.add_argument("--config", type=str, default="./config/training_stage2.yaml",
                        help="Path to config file")
     parser.add_argument("--resume", type=str, default="",
                        help="Resume from checkpoint")
+    parser.add_argument("--batch_size", type=int, default=None, help="覆盖 eval batch size")
+    parser.add_argument("--num_workers", type=int, default=None, help="覆盖 dataloader num_workers")
+    parser.add_argument("--dtype", type=str, default=None, choices=list(_DTYPE_MAP.keys()) + [None],
+                       help="推理精度: fp32 / fp16 / bf16")
+    parser.add_argument("--limit_batches", type=int, default=None,
+                       help="只跑前 N 个 batch，用于快速验证")
     args = parser.parse_args()
-    # 加载配置
+
     with open(args.config, 'r') as f:
         config = yaml.safe_load(f)
-   
+
+    eval_cfg = config.get("eval", {}) or {}
+    batch_size = args.batch_size if args.batch_size is not None else eval_cfg.get("batch_size", config["dataset"]["batch_size"])
+    num_workers = args.num_workers if args.num_workers is not None else eval_cfg.get("num_workers", config["dataset"]["num_workers"])
+    dtype_name = args.dtype if args.dtype is not None else eval_cfg.get("dtype", "fp32")
+    limit_batches = args.limit_batches if args.limit_batches is not None else int(eval_cfg.get("limit_batches", 0))
+
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
 
-    # 创建模型
+    amp_dtype = _resolve_dtype(dtype_name, device)
+    print(f"Eval config | batch_size={batch_size} num_workers={num_workers} dtype={amp_dtype} limit_batches={limit_batches}")
+
     model = create_multimodal_model(config)
     model.to(device)
+    model.eval()
 
-    train_loader,val_loader,test_loader = build_dataloders(
+    train_loader, val_loader, test_loader = build_dataloders(
         vision_model_name=config["dataset"]["vision_model_name"],
         qwen_model_name=config["dataset"]["qwen_model_name"],
         chat_json_path=config["dataset"]["chat_json_path"],
         image_root=config["dataset"]["image_root"],
-        batch_size=config["dataset"]["batch_size"],
-        num_workers=config["dataset"]["num_workers"],
+        batch_size=batch_size,
+        num_workers=num_workers,
         max_length=config["dataset"]["max_length"],
         train_ratio=config["dataset"]["train_ratio"],
         val_ratio=config["dataset"]["val_ratio"],
-        test_ratio=config["dataset"]["test_ratio"]
+        test_ratio=config["dataset"]["test_ratio"],
     )
     checkpoint = load_checkpoint(args.resume, model)
 
@@ -210,5 +256,7 @@ if __name__=="__main__":
         save_json_path=os.path.join(config.get("save_dir", "./outputs"), "test_predictions.json"),
         log_to_wandb=config.get("use_wandb", True),
         prefix="test",
+        amp_dtype=amp_dtype,
+        limit_batches=limit_batches,
     )
     print_caption_metrics(test_metrics, prefix="Test")
