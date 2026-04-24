@@ -6,3 +6,4 @@ peft
 datasets
 pycocoevalcap
 nltk
+openai
