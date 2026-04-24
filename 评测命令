@@ -1,0 +1,53 @@
+# 下载模型
+hf auth login
+
+hf upload Lris47/mllm_stage1 .
+
+# 下载数据
+python data/download_data.py
+
+# eval 测试
+python eval.py --resume XX.pt
+python eval.py --resume outputs/best_checkpoint.pt
+python eval.py --resume outputs/best_checkpoint.pt --limit_batches 20   # 先跑 20 个 batch 验证指标
+python eval.py --resume outputs/best_checkpoint.pt --dtype fp16 --batch_size 128
+
+python eval_judge.py \
+    --config config/training_stage2.yaml \
+    --checkpoint outputs/best_checkpoint.pt \
+    --judge_model qwen-vl-max \
+    --output_json outputs/judge_results.json \
+    --limit 100 \
+    --api_key 
+
+
+10个batch
+epoch-1:
+{'testlen': 5661, 'reflen': 7506, 'guess': [5661, 5021, 4381, 3741], 'correct': [1791, 479, 184, 88]}                                                                  
+ratio: 0.7541966426857508
+[Evaluation Results Saved] ./outputs/test_predictions.json
+[Test] | BLEU-1=0.2284 | BLEU-2=0.1254 | BLEU-3=0.0781 | BLEU-4=0.0533 | METEOR=0.1990 | ROUGE-L=0.2395 | CIDEr=0.6411
+
+step-15000:
+{'testlen': 6091, 'reflen': 7506, 'guess': [6091, 5451, 4811, 4171], 'correct': [1744, 407, 136, 59]}                                                                  
+ratio: 0.811484146016412
+[Evaluation Results Saved] ./outputs/test_predictions.json
+[Test] | BLEU-1=0.2270 | BLEU-2=0.1159 | BLEU-3=0.0670 | BLEU-4=0.0429 | METEOR=0.1832 | ROUGE-L=0.2243 | CIDEr=0.5140
+
+step-10000:
+{'testlen': 5590, 'reflen': 7506, 'guess': [5590, 4950, 4310, 3670], 'correct': [1636, 377, 102, 38]}                                                                  
+ratio: 0.7447375432985951
+[Evaluation Results Saved] ./outputs/test_predictions.json
+[Test] | BLEU-1=0.2077 | BLEU-2=0.1060 | BLEU-3=0.0574 | BLEU-4=0.0343 | METEOR=0.1766 | ROUGE-L=0.2219 | CIDEr=0.4788
+
+best:
+{'testlen': 5661, 'reflen': 7506, 'guess': [5661, 5021, 4381, 3741], 'correct': [1791, 479, 184, 88]}                                                                  
+ratio: 0.7541966426857508
+[Evaluation Results Saved] ./outputs/test_predictions.json
+[Test] | BLEU-1=0.2284 | BLEU-2=0.1254 | BLEU-3=0.0781 | BLEU-4=0.0533 | METEOR=0.1990 | ROUGE-L=0.2395 | CIDEr=0.6411
+
+全部test：
+{'testlen': 545112, 'reflen': 694727, 'guess': [545112, 485574, 426036, 366500], 'correct': [174469, 51087, 22105, 11736]}                                             
+ratio: 0.7846420248529267
+[Evaluation Results Saved] ./outputs/test_predictions.json
+[Test] | BLEU-1=0.2432 | BLEU-2=0.1395 | BLEU-3=0.0915 | BLEU-4=0.0657 | METEOR=0.2081 | ROUGE-L=0.2486 | CIDEr=0.6561
