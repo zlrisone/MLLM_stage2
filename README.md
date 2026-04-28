@@ -7,7 +7,7 @@
 - **冻结** 视觉编码器与 LLM，仅 **训练投影器（Projector）**，将视觉特征映射到与 LLM 词嵌入对齐的空间。
 - 数据为 **纯 caption/描述** 监督（本仓库默认 `LLaVA-CC3M-Pretrain` 风格 `chat.json` 路径），**不做问答（QA）**。
 - 输入侧使用 **自然续写式前缀/指令**（如 *Give a short and clear explanation…* 等，与 `caption_dataset` 模板一致），在序列中用占位符与视觉 token 融合后自回归生成描述。
-- 训练期可重点看 **validation loss、BLEU-4、METEOR** 做快速反馈；正式评测可补充 **CIDEr、SPICE、METEOR、BLEU-4** 与少量 **人工或 LLM-as-a-Judge**。
+- 训练期可重点看 **validation loss、BLEU-4** 等做快速反馈；正式评测可看 **BLEU-n、ROUGE-L、CIDEr**（本仓库实测中 **METEOR** 常为占位 0，见 `评测结果.txt`）以及 **人工或 LLM-as-a-Judge**。
 
 > 与简单 MLP 相比，过深的 MLP 易出现 **梯度消失**；本配置采用 **输入 LayerNorm → 三层线性 DeepMLP → 输出 LayerNorm** 的 `DeepMLPProjector`（见 `models/projector.py`）。
 
@@ -63,7 +63,7 @@ python train.py --config config/training_stage2.yaml --resume /path/to/checkpoin
 
 ## 评测命令
 
-**自动指标（测试集生成 + BLEU / METEOR / ROUGE-L / CIDEr 等）**：
+**自动指标（测试集生成 + BLEU / ROUGE-L / CIDEr；METEOR 视环境是否真正计算而定）**：
 
 ```bash
 python eval.py --config config/training_stage2.yaml --resume outputs/best_checkpoint.pt
@@ -113,19 +113,34 @@ python eval_judge.py \
 
 ## 结果表
 
-下表为在 **全量 test** 上、仓库记录过的 **自动指标**（与 `eval.py` 输出一致，数值来自实验记录，供复现对比）：
+下列数值摘自仓库内 **`评测结果.txt`**（自训模型与 `eval.py` 一致；HF LLaVA 段见文末）。自训 checkpoint 评测中 **METEOR 未实际计算**（日志中为 0.0000），故 **自训模型表** 与下方 LLaVA 表的主列 **均不列出 METEOR**（HF 侧的 METEOR 仍可在 `评测命令.txt` / `评测结果.txt` 原文查看）。
 
-| 设置 | BLEU-1 | BLEU-2 | BLEU-3 | BLEU-4 | METEOR | ROUGE-L | CIDEr |
-|------|--------|--------|--------|--------|--------|---------|-------|
-| **本仓库 best checkpoint** | 0.2432 | 0.1395 | 0.0915 | **0.0657** | **0.2081** | **0.2486** | **0.6561** |
-| step-15000 | 0.2374 | 0.1274 | 0.0781 | 0.0523 | 0.1939 | 0.2319 | 0.5361 |
-| LLaVA-OneVision Qwen2-0.5B（基线，同评测脚本记录） | 0.1774 | 0.0754 | 0.0321 | 0.0149 | 0.1421 | 0.1528 | 0.2655 |
+**全量 test 集**上的自动指标：
 
-**Qwen-VL-Max 人工式 Judge（`outputs/judge_results.json`，N=100）** 上各维度均分（1–5 分，越高越好）：
+| 设置 | BLEU-1 | BLEU-2 | BLEU-3 | BLEU-4 | ROUGE-L | CIDEr |
+|------|--------|--------|--------|--------|---------|-------|
+| **best checkpoint** | 0.2433 | 0.1395 | 0.0916 | **0.0658** | 0.2487 | **0.6568** |
+| checkpoint-step-25000 | **0.2459** | **0.1405** | **0.0918** | 0.0655 | 0.2483 | 0.6515 |
+| checkpoint-step-20000 | 0.2388 | 0.1346 | 0.0865 | 0.0608 | 0.2437 | 0.6187 |
 
-| 样本数 | accuracy | detail | relevance | fluency | overall |
-|--------|----------|--------|-----------|---------|---------|
-| 100 | 2.98 | 2.37 | 3.63 | 4.74 | 3.12 |
+**Hugging Face LLaVA 基线**（`eval_llava.py`，与 `评测命令.txt` 中记录一致；**非全量 test**，且与上表 **不可直接逐行对比** 参看「备注」）：
+
+| 模型 | BLEU-1 | BLEU-2 | BLEU-3 | BLEU-4 | ROUGE-L | CIDEr | 备注 |
+|------|--------|--------|--------|--------|---------|-------|------|
+| `llava-hf/llava-onevision-qwen2-0.5b-ov-hf` | 0.1774 | 0.0754 | 0.0321 | 0.0149 | 0.1528 | 0.2655 | `batch_size=64`，`limit_batches=10`，`fp16`；输出见 `outputs/llava_test_predictions.json` |
+| `llava-hf/llava-1.5-7b-hf` | 0.0658 | 0.0297 | 0.0127 | 0.0000 | 0.1021 | 0.0006 | `batch_size=1`，`limit_batches=10`；该次统计中 `reflen` 与全量 test 不一致，**指标仅作粗参考** |
+| `llava-hf/llava-1.5-7b-hf` | 0.0734 | 0.0331 | 0.0139 | 0.0070 | 0.1065 | 0.0099 | `batch_size=2`，`limit_batches=50`；仍为子集评测，非全量 test |
+
+*说明：上述 HF 日志里若含 METEOR，仍以 `评测命令.txt` 原文为准；本 README 主表与自训 checkpoint 表为统一风格 **不列 METEOR**（自训侧 METEOR 未有效计算）。*
+
+**Qwen-VL-Max 作为 Judge**（N=100，1–5 分，越高越好）：
+
+| 设置 | accuracy | detail | relevance | fluency | overall |
+|------|----------|--------|-----------|---------|---------|
+| **best checkpoint** | 2.97 | 2.33 | 3.61 | 4.74 | 3.10 |
+| checkpoint-step-25000 | 2.90 | 2.30 | 3.61 | 4.82 | 3.09 |
+
+对应输出文件：`outputs/best-checkpoint-judge_results.json`、`outputs/checkpoint-step-25000-judge_results.json`（见 `评测结果.txt`）。
 
 ## 可视化样例（6 张）
 

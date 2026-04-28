@@ -1,0 +1,1523 @@
+{
+  "judge_model": "qwen-vl-max",
+  "aggregate": {
+    "average": {
+      "accuracy": 2.97,
+      "detail": 2.33,
+      "relevance": 3.61,
+      "fluency": 4.74,
+      "overall": 3.1
+    },
+    "valid_counts": {
+      "accuracy": 100,
+      "detail": 100,
+      "relevance": 100,
+      "fluency": 100,
+      "overall": 100
+    },
+    "num_samples": 100,
+    "num_errors": 0
+  },
+  "results": [
+    {
+      "sample_id": 0,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_001725640.jpg",
+      "reference": "the world premiere - arrivals",
+      "prediction": "actor in a black skirt with a floral print.",
+      "judge": {
+        "accuracy": 2,
+        "detail": 2,
+        "relevance": 3,
+        "fluency": 5,
+        "overall": 3,
+        "reason": "候选描述中提到的'black skirt with a floral print'不准确，实际为彩色刺绣图案的短裙，且未提及人物身份和活动背景，细节不足但语言流畅",
+        "_raw": "{\"accuracy\": 2, \"detail\": 2, \"relevance\": 3, \"fluency\": 5, \"overall\": 3, \"reason\": \"候选描述中提到的'black skirt with a floral print'不准确，实际为彩色刺绣图案的短裙，且未提及人物身份和活动背景，细节不足但语言流畅\"}"
+      }
+    },
+    {
+      "sample_id": 1,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_001836631.jpg",
+      "reference": "modern kitchen in the glass house",
+      "prediction": "example of a kitchen with a large island and open floor plan",
+      "judge": {
+        "accuracy": 4,
+        "detail": 3,
+        "relevance": 4,
+        "fluency": 5,
+        "overall": 4,
+        "reason": "候选描述基本准确，提到了厨房岛台和开放式布局，但未提及玻璃墙、木质天花板等关键细节",
+        "_raw": "{\"accuracy\": 4, \"detail\": 3, \"relevance\": 4, \"fluency\": 5, \"overall\": 4, \"reason\": \"候选描述基本准确，提到了厨房岛台和开放式布局，但未提及玻璃墙、木质天花板等关键细节\"}"
+      }
+    },
+    {
+      "sample_id": 2,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000273360.jpg",
+      "reference": "blue jeans with a zipper",
+      "prediction": "close up of a denim jacket with zipper",
+      "judge": {
+        "accuracy": 5,
+        "detail": 4,
+        "relevance": 5,
+        "fluency": 5,
+        "overall": 5,
+        "reason": "候选描述准确指出了图片中的牛仔夹克和拉链，细节丰富且语言流畅，与图像内容高度一致",
+        "_raw": "{\"accuracy\": 5, \"detail\": 4, \"relevance\": 5, \"fluency\": 5, \"overall\": 5, \"reason\": \"候选描述准确指出了图片中的牛仔夹克和拉链，细节丰富且语言流畅，与图像内容高度一致\"}"
+      }
+    },
+    {
+      "sample_id": 3,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000703380.jpg",
+      "reference": "ideas in food : use the microwave to make sponge cake",
+      "prediction": "chocolate chip cookies with a twist",
+      "judge": {
+        "accuracy": 1,
+        "detail": 1,
+        "relevance": 1,
+        "fluency": 5,
+        "overall": 1,
+        "reason": "候选描述将图片中的巧克力蛋糕误认为是巧克力 chip 饼干，存在明显事实错误",
+        "_raw": "{\"accuracy\": 1, \"detail\": 1, \"relevance\": 1, \"fluency\": 5, \"overall\": 1, \"reason\": \"候选描述将图片中的巧克力蛋糕误认为是巧克力 chip 饼干，存在明显事实错误\"}"
+      }
+    },
+    {
+      "sample_id": 4,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002581081.jpg",
+      "reference": "a sampling of some gluten - free snacks that i picked up .",
+      "prediction": "the best way to lose weight is to eat less and exercise more.",
+      "judge": {
+        "accuracy": 1,
+        "detail": 1,
+        "relevance": 1,
+        "fluency": 5,
+        "overall": 1,
+        "reason": "候选描述与图片内容完全无关，图片展示的是货架上的零食包装，而描述却谈论减肥方法，存在严重事实错误和无关信息。",
+        "_raw": "{\"accuracy\": 1, \"detail\": 1, \"relevance\": 1, \"fluency\": 5, \"overall\": 1, \"reason\": \"候选描述与图片内容完全无关，图片展示的是货架上的零食包装，而描述却谈论减肥方法，存在严重事实错误和无关信息。\"}"
+      }
+    },
+    {
+      "sample_id": 5,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_001730236.jpg",
+      "reference": "crow calling from its perch on a branch",
+      "prediction": "biological species in a tree",
+      "judge": {
+        "accuracy": 3,
+        "detail": 2,
+        "relevance": 3,
+        "fluency": 4,
+        "overall": 3,
+        "reason": "候选描述基本正确但过于笼统，未体现乌鸦和树枝等关键细节",
+        "_raw": "{\"accuracy\": 3, \"detail\": 2, \"relevance\": 3, \"fluency\": 4, \"overall\": 3, \"reason\": \"候选描述基本正确但过于笼统，未体现乌鸦和树枝等关键细节\"}"
+      }
+    },
+    {
+      "sample_id": 6,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000333178.jpg",
+      "reference": "cute girl with tender skin on a white background",
+      "prediction": "woman with a smile and makeup on her face",
+      "judge": {
+        "accuracy": 3,
+        "detail": 2,
+        "relevance": 4,
+        "fluency": 5,
+        "overall": 3,
+        "reason": "描述基本正确但未准确反映皮肤状态和背景细节，且‘makeup’与图片中自然无妆感不符",
+        "_raw": "{\"accuracy\": 3, \"detail\": 2, \"relevance\": 4, \"fluency\": 5, \"overall\": 3, \"reason\": \"描述基本正确但未准确反映皮肤状态和背景细节，且‘makeup’与图片中自然无妆感不符\"}"
+      }
+    },
+    {
+      "sample_id": 7,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000201583.jpg",
+      "reference": "actor shows off her midriff on the beach during filming - photo",
+      "prediction": "actor is seen in a blue dress and heels on the beach.",
+      "judge": {
+        "accuracy": 3,
+        "detail": 3,
+        "relevance": 4,
+        "fluency": 5,
+        "overall": 4,
+        "reason": "描述基本准确，但未提及高跟鞋，且未说明人物在拍摄现场的动态场景",
+        "_raw": "{\"accuracy\": 3, \"detail\": 3, \"relevance\": 4, \"fluency\": 5, \"overall\": 4, \"reason\": \"描述基本准确，但未提及高跟鞋，且未说明人物在拍摄现场的动态场景\"}"
+      }
+    },
+    {
+      "sample_id": 8,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000707152.jpg",
+      "reference": "a typical airport terminal - if you 're here , you 're stuck - so make the best of it from a nutrition and fitness perspective",
+      "prediction": "airline is closing its terminal",
+      "judge": {
+        "accuracy": 1,
+        "detail": 1,
+        "relevance": 1,
+        "fluency": 3,
+        "overall": 1,
+        "reason": "候选描述与图片内容严重不符，图片显示的是机场候机区的正常场景，并无关闭迹象",
+        "_raw": "{\"accuracy\": 1, \"detail\": 1, \"relevance\": 1, \"fluency\": 3, \"overall\": 1, \"reason\": \"候选描述与图片内容严重不符，图片显示的是机场候机区的正常场景，并无关闭迹象\"}"
+      }
+    },
+    {
+      "sample_id": 9,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_001717704.jpg",
+      "reference": "arch bridge taken in the area",
+      "prediction": "the ruins of the old city are visible in the distance.",
+      "judge": {
+        "accuracy": 1,
+        "detail": 1,
+        "relevance": 2,
+        "fluency": 5,
+        "overall": 2,
+        "reason": "候选描述错误地声称远处可见古城遗迹，但图片中实际为现代石堆和自然景观，无任何古城痕迹",
+        "_raw": "{\"accuracy\": 1, \"detail\": 1, \"relevance\": 2, \"fluency\": 5, \"overall\": 2, \"reason\": \"候选描述错误地声称远处可见古城遗迹，但图片中实际为现代石堆和自然景观，无任何古城痕迹\"}"
+      }
+    },
+    {
+      "sample_id": 10,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_001007807.jpg",
+      "reference": "another easy idea for leftovers",
+      "prediction": "a bowl of soup with carrots and celery",
+      "judge": {
+        "accuracy": 5,
+        "detail": 4,
+        "relevance": 5,
+        "fluency": 5,
+        "overall": 5,
+        "reason": "候选描述准确反映了图片内容，包含主要食材胡萝卜和芹菜，语言流畅且切题，仅缺少葱花等细节",
+        "_raw": "{\"accuracy\": 5, \"detail\": 4, \"relevance\": 5, \"fluency\": 5, \"overall\": 5, \"reason\": \"候选描述准确反映了图片内容，包含主要食材胡萝卜和芹菜，语言流畅且切题，仅缺少葱花等细节\"}"
+      }
+    },
+    {
+      "sample_id": 11,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_001948843.jpg",
+      "reference": "indie rock artist and bass guitar player of tv talk show perform on stage at theatre",
+      "prediction": "hard rock artist performs on stage",
+      "judge": {
+        "accuracy": 3,
+        "detail": 2,
+        "relevance": 4,
+        "fluency": 5,
+        "overall": 3,
+        "reason": "候选描述基本正确但过于笼统，未提及吉他手和乐队成员等关键细节，且未能准确反映独立摇滚风格",
+        "_raw": "{\"accuracy\": 3, \"detail\": 2, \"relevance\": 4, \"fluency\": 5, \"overall\": 3, \"reason\": \"候选描述基本正确但过于笼统，未提及吉他手和乐队成员等关键细节，且未能准确反映独立摇滚风格\"}"
+      }
+    },
+    {
+      "sample_id": 12,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_001101595.jpg",
+      "reference": "mussels in spicy tomato sauce with ginger , garlic , coriander and lime .",
+      "prediction": "mussels on a plate with a side of garlic and lemon.",
+      "judge": {
+        "accuracy": 2,
+        "detail": 3,
+        "relevance": 4,
+        "fluency": 5,
+        "overall": 3,
+        "reason": "候选描述中提到的蒜和柠檬在图中未明显可见，且酱汁类型与参考描述不符，存在事实偏差",
+        "_raw": "{\"accuracy\": 2, \"detail\": 3, \"relevance\": 4, \"fluency\": 5, \"overall\": 3, \"reason\": \"候选描述中提到的蒜和柠檬在图中未明显可见，且酱汁类型与参考描述不符，存在事实偏差\"}"
+      }
+    },
+    {
+      "sample_id": 13,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000930296.jpg",
+      "reference": "the flowers of the almond tree",
+      "prediction": "a close up of a white flower on the black background",
+      "judge": {
+        "accuracy": 4,
+        "detail": 3,
+        "relevance": 4,
+        "fluency": 5,
+        "overall": 4,
+        "reason": "候选描述基本准确，指出了白色花朵和黑色背景，但未提及花朵的具体形态和数量，细节略显不足",
+        "_raw": "{\"accuracy\": 4, \"detail\": 3, \"relevance\": 4, \"fluency\": 5, \"overall\": 4, \"reason\": \"候选描述基本准确，指出了白色花朵和黑色背景，但未提及花朵的具体形态和数量，细节略显不足\"}"
+      }
+    },
+    {
+      "sample_id": 14,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002278559.jpg",
+      "reference": "the home -- and yoga studio , shown -- was recently listed for $939,000 and is now under contract .",
+      "prediction": "the living room is a great place to relax and entertain.",
+      "judge": {
+        "accuracy": 5,
+        "detail": 3,
+        "relevance": 5,
+        "fluency": 5,
+        "overall": 4,
+        "reason": "候选描述准确反映了图片内容，语言流畅且切题，但细节描述较为简略，未提及具体家具或装饰元素。",
+        "_raw": "{\"accuracy\": 5, \"detail\": 3, \"relevance\": 5, \"fluency\": 5, \"overall\": 4, \"reason\": \"候选描述准确反映了图片内容，语言流畅且切题，但细节描述较为简略，未提及具体家具或装饰元素。\"}"
+      }
+    },
+    {
+      "sample_id": 15,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002718072.jpg",
+      "reference": "travel credit cards without an annual fee",
+      "prediction": "airplane flying over the sea with sunset",
+      "judge": {
+        "accuracy": 5,
+        "detail": 4,
+        "relevance": 5,
+        "fluency": 5,
+        "overall": 5,
+        "reason": "候选描述准确捕捉了飞机、海洋和日落的核心元素，语言简洁流畅，无错误或无关信息",
+        "_raw": "{\"accuracy\": 5, \"detail\": 4, \"relevance\": 5, \"fluency\": 5, \"overall\": 5, \"reason\": \"候选描述准确捕捉了飞机、海洋和日落的核心元素，语言简洁流畅，无错误或无关信息\"}"
+      }
+    },
+    {
+      "sample_id": 16,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000499896.jpg",
+      "reference": "person caught and released a 10lb salmon on a fly .",
+      "prediction": "person caught a rainbow trout in the river",
+      "judge": {
+        "accuracy": 2,
+        "detail": 3,
+        "relevance": 4,
+        "fluency": 5,
+        "overall": 3,
+        "reason": "鱼的种类识别错误，实际为梭鲈而非虹鳟，但基本场景描述正确",
+        "_raw": "{\"accuracy\": 2, \"detail\": 3, \"relevance\": 4, \"fluency\": 5, \"overall\": 3, \"reason\": \"鱼的种类识别错误，实际为梭鲈而非虹鳟，但基本场景描述正确\"}"
+      }
+    },
+    {
+      "sample_id": 17,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_001757245.jpg",
+      "reference": "filled with lots of good for you ingredients , this recipe is filled with iron , potassium , fiber and so much more .",
+      "prediction": "make your own kale dressing with this recipe.",
+      "judge": {
+        "accuracy": 4,
+        "detail": 3,
+        "relevance": 5,
+        "fluency": 5,
+        "overall": 4,
+        "reason": "候选描述准确指出了图片中的羽衣甘蓝酱汁制作场景，语言流畅且切题，但未提及具体动作（如倒入）和背景食材细节，略显简略。",
+        "_raw": "{\"accuracy\": 4, \"detail\": 3, \"relevance\": 5, \"fluency\": 5, \"overall\": 4, \"reason\": \"候选描述准确指出了图片中的羽衣甘蓝酱汁制作场景，语言流畅且切题，但未提及具体动作（如倒入）和背景食材细节，略显简略。\"}"
+      }
+    },
+    {
+      "sample_id": 18,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002237341.jpg",
+      "reference": "rock artist premieres her new actor - directed music video .",
+      "prediction": "fans of the band attend a concert.",
+      "judge": {
+        "accuracy": 1,
+        "detail": 1,
+        "relevance": 1,
+        "fluency": 5,
+        "overall": 1,
+        "reason": "候选描述与图片内容严重不符，图片中并非演唱会场景，而是某位女性在被媒体采访，周围有记者和麦克风，而非粉丝参加音乐会。",
+        "_raw": "{\"accuracy\": 1, \"detail\": 1, \"relevance\": 1, \"fluency\": 5, \"overall\": 1, \"reason\": \"候选描述与图片内容严重不符，图片中并非演唱会场景，而是某位女性在被媒体采访，周围有记者和麦克风，而非粉丝参加音乐会。\"}"
+      }
+    },
+    {
+      "sample_id": 19,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000184401.jpg",
+      "reference": "a camel on the road , he 's not too worried about the speed limit .",
+      "prediction": "the camel is a symbol of the country.",
+      "judge": {
+        "accuracy": 2,
+        "detail": 1,
+        "relevance": 3,
+        "fluency": 5,
+        "overall": 2,
+        "reason": "候选描述缺乏具体细节，未提及图片中的骆驼、道路或限速标志等关键元素，仅泛泛而谈其象征意义，与图像内容关联较弱。",
+        "_raw": "{\"accuracy\": 2, \"detail\": 1, \"relevance\": 3, \"fluency\": 5, \"overall\": 2, \"reason\": \"候选描述缺乏具体细节，未提及图片中的骆驼、道路或限速标志等关键元素，仅泛泛而谈其象征意义，与图像内容关联较弱。\"}"
+      }
+    },
+    {
+      "sample_id": 20,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_001666064.jpg",
+      "reference": "fall nail designs you need to try this year - page of 3",
+      "prediction": "nail art for the season",
+      "judge": {
+        "accuracy": 5,
+        "detail": 3,
+        "relevance": 5,
+        "fluency": 5,
+        "overall": 4,
+        "reason": "候选描述准确概括了图片主题，语言流畅且切题，但细节描述较简略",
+        "_raw": "{\"accuracy\": 5, \"detail\": 3, \"relevance\": 5, \"fluency\": 5, \"overall\": 4, \"reason\": \"候选描述准确概括了图片主题，语言流畅且切题，但细节描述较简略\"}"
+      }
+    },
+    {
+      "sample_id": 21,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000076391.jpg",
+      "reference": "a camel caravan heading into the desert",
+      "prediction": "a camel caravan on the desert",
+      "judge": {
+        "accuracy": 5,
+        "detail": 4,
+        "relevance": 5,
+        "fluency": 5,
+        "overall": 5,
+        "reason": "候选描述准确反映了图片中的骆驼商队在沙漠中的场景，语言流畅且切题，仅缺少对人物和骆驼状态的细节描述",
+        "_raw": "{\"accuracy\": 5, \"detail\": 4, \"relevance\": 5, \"fluency\": 5, \"overall\": 5, \"reason\": \"候选描述准确反映了图片中的骆驼商队在沙漠中的场景，语言流畅且切题，仅缺少对人物和骆驼状态的细节描述\"}"
+      }
+    },
+    {
+      "sample_id": 22,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002366925.jpg",
+      "reference": "business woman takes a folder that is on the shelf in the office",
+      "prediction": "woman with a clipboard and folder in the office",
+      "judge": {
+        "accuracy": 4,
+        "detail": 3,
+        "relevance": 5,
+        "fluency": 5,
+        "overall": 4,
+        "reason": "描述基本准确，但未提及文件柜和具体动作细节，略显简略",
+        "_raw": "{\"accuracy\": 4, \"detail\": 3, \"relevance\": 5, \"fluency\": 5, \"overall\": 4, \"reason\": \"描述基本准确，但未提及文件柜和具体动作细节，略显简略\"}"
+      }
+    },
+    {
+      "sample_id": 23,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000941807.jpg",
+      "reference": "property image # holiday at the seaside",
+      "prediction": "property image # a cozy cottage with a view of the sea",
+      "judge": {
+        "accuracy": 1,
+        "detail": 1,
+        "relevance": 1,
+        "fluency": 5,
+        "overall": 1,
+        "reason": "候选描述与图片内容严重不符，图片为浴室而非海边小屋，存在明显幻觉",
+        "_raw": "{\"accuracy\": 1, \"detail\": 1, \"relevance\": 1, \"fluency\": 5, \"overall\": 1, \"reason\": \"候选描述与图片内容严重不符，图片为浴室而非海边小屋，存在明显幻觉\"}"
+      }
+    },
+    {
+      "sample_id": 24,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002224359.jpg",
+      "reference": "girl sniffing and enjoying blossoming tree in the spring",
+      "prediction": "young girl in a park with flowers and trees",
+      "judge": {
+        "accuracy": 3,
+        "detail": 2,
+        "relevance": 4,
+        "fluency": 5,
+        "overall": 3,
+        "reason": "候选描述基本正确但细节不足，未提及女孩闻花的动作和具体场景特征",
+        "_raw": "{\"accuracy\": 3, \"detail\": 2, \"relevance\": 4, \"fluency\": 5, \"overall\": 3, \"reason\": \"候选描述基本正确但细节不足，未提及女孩闻花的动作和具体场景特征\"}"
+      }
+    },
+    {
+      "sample_id": 25,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002751319.jpg",
+      "reference": "elephant balancing on a hippo",
+      "prediction": "the elephant is a dangerous animal.",
+      "judge": {
+        "accuracy": 1,
+        "detail": 1,
+        "relevance": 2,
+        "fluency": 5,
+        "overall": 2,
+        "reason": "候选描述与图片内容严重不符，未提及大象平衡在河马上的关键视觉信息，且‘危险动物’的表述无依据",
+        "_raw": "{\"accuracy\": 1, \"detail\": 1, \"relevance\": 2, \"fluency\": 5, \"overall\": 2, \"reason\": \"候选描述与图片内容严重不符，未提及大象平衡在河马上的关键视觉信息，且‘危险动物’的表述无依据\"}"
+      }
+    },
+    {
+      "sample_id": 26,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002821068.jpg",
+      "reference": "actor is flanked by fictional character andfilm character while dribbling a basketball before the game against sports team .",
+      "prediction": "actor poses with actor during a game against sports team.",
+      "judge": {
+        "accuracy": 2,
+        "detail": 2,
+        "relevance": 3,
+        "fluency": 4,
+        "overall": 3,
+        "reason": "候选描述将两个角色都称为'actor'，忽略了其为虚构角色（如Stormtrooper和R2-D2）的事实，且未提及篮球和场景细节，存在事实性错误和信息缺失。",
+        "_raw": "{\"accuracy\": 2, \"detail\": 2, \"relevance\": 3, \"fluency\": 4, \"overall\": 3, \"reason\": \"候选描述将两个角色都称为'actor'，忽略了其为虚构角色（如Stormtrooper和R2-D2）的事实，且未提及篮球和场景细节，存在事实性错误和信息缺失。\"}"
+      }
+    },
+    {
+      "sample_id": 27,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002278934.jpg",
+      "reference": "abstract lines background , lattice on a white background .",
+      "prediction": "a 3d animation of a grid pattern on the floor",
+      "judge": {
+        "accuracy": 2,
+        "detail": 2,
+        "relevance": 3,
+        "fluency": 5,
+        "overall": 3,
+        "reason": "候选描述将静态图像误认为是3D动画，存在事实性错误；未准确描述网格的立体透视结构和黑白线条特征，细节不足但语言流畅。",
+        "_raw": "{\"accuracy\": 2, \"detail\": 2, \"relevance\": 3, \"fluency\": 5, \"overall\": 3, \"reason\": \"候选描述将静态图像误认为是3D动画，存在事实性错误；未准确描述网格的立体透视结构和黑白线条特征，细节不足但语言流畅。\"}"
+      }
+    },
+    {
+      "sample_id": 28,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000970430.jpg",
+      "reference": "blues artist performs on stage playing guitar .",
+      "prediction": "artist performs on stage during the tour.",
+      "judge": {
+        "accuracy": 4,
+        "detail": 3,
+        "relevance": 4,
+        "fluency": 5,
+        "overall": 4,
+        "reason": "候选描述基本准确，但缺少具体乐器和表演类型细节，整体表达流畅且相关",
+        "_raw": "{\"accuracy\": 4, \"detail\": 3, \"relevance\": 4, \"fluency\": 5, \"overall\": 4, \"reason\": \"候选描述基本准确，但缺少具体乐器和表演类型细节，整体表达流畅且相关\"}"
+      }
+    },
+    {
+      "sample_id": 29,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002264505.jpg",
+      "reference": "roast chicken via - anyone tried this ?",
+      "prediction": "roast chicken in a pot with vegetables and gravy",
+      "judge": {
+        "accuracy": 3,
+        "detail": 4,
+        "relevance": 5,
+        "fluency": 5,
+        "overall": 4,
+        "reason": "候选描述基本准确，但未提及图片中可见的南瓜和西兰花等具体蔬菜，且无明显酱汁（gravy），细节略有偏差",
+        "_raw": "{\"accuracy\": 3, \"detail\": 4, \"relevance\": 5, \"fluency\": 5, \"overall\": 4, \"reason\": \"候选描述基本准确，但未提及图片中可见的南瓜和西兰花等具体蔬菜，且无明显酱汁（gravy），细节略有偏差\"}"
+      }
+    },
+    {
+      "sample_id": 30,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000191179.jpg",
+      "reference": "setting up for the recording",
+      "prediction": "the studio is a great place to learn.",
+      "judge": {
+        "accuracy": 1,
+        "detail": 1,
+        "relevance": 1,
+        "fluency": 5,
+        "overall": 1,
+        "reason": "候选描述与图片内容严重不符，图片显示的是录音室准备录制的场景，而非学习场所",
+        "_raw": "{\"accuracy\": 1, \"detail\": 1, \"relevance\": 1, \"fluency\": 5, \"overall\": 1, \"reason\": \"候选描述与图片内容严重不符，图片显示的是录音室准备录制的场景，而非学习场所\"}"
+      }
+    },
+    {
+      "sample_id": 31,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002632537.jpg",
+      "reference": "person looking chic in a tee , metallic blaze and skinny jeans .",
+      "prediction": "actor in a black leather jacket and jeans",
+      "judge": {
+        "accuracy": 3,
+        "detail": 2,
+        "relevance": 4,
+        "fluency": 5,
+        "overall": 3,
+        "reason": "候选描述基本正确但不够准确，未提及金属光泽夹克和T恤等关键细节，且将人物称为'actor'缺乏依据",
+        "_raw": "{\"accuracy\": 3, \"detail\": 2, \"relevance\": 4, \"fluency\": 5, \"overall\": 3, \"reason\": \"候选描述基本正确但不够准确，未提及金属光泽夹克和T恤等关键细节，且将人物称为'actor'缺乏依据\"}"
+      }
+    },
+    {
+      "sample_id": 32,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000953606.jpg",
+      "reference": "view to the northeast across full - height view",
+      "prediction": "view from the southeast - exterior photo",
+      "judge": {
+        "accuracy": 3,
+        "detail": 2,
+        "relevance": 4,
+        "fluency": 5,
+        "overall": 3,
+        "reason": "候选描述方向与实际视角存在偏差，但基本正确；细节描述不足，未提及建筑特征和环境元素；语言流畅且切题。",
+        "_raw": "{\"accuracy\": 3, \"detail\": 2, \"relevance\": 4, \"fluency\": 5, \"overall\": 3, \"reason\": \"候选描述方向与实际视角存在偏差，但基本正确；细节描述不足，未提及建筑特征和环境元素；语言流畅且切题。\"}"
+      }
+    },
+    {
+      "sample_id": 33,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002294067.jpg",
+      "reference": "hiker walking a grassy peak before a foggy mountain valley",
+      "prediction": "a mountain climber walks up the ridge",
+      "judge": {
+        "accuracy": 4,
+        "detail": 3,
+        "relevance": 5,
+        "fluency": 5,
+        "overall": 4,
+        "reason": "候选描述基本准确，但未提及草地和云海等关键细节，且将徒步者描述为‘登山者’略显不精确",
+        "_raw": "{\"accuracy\": 4, \"detail\": 3, \"relevance\": 5, \"fluency\": 5, \"overall\": 4, \"reason\": \"候选描述基本准确，但未提及草地和云海等关键细节，且将徒步者描述为‘登山者’略显不精确\"}"
+      }
+    },
+    {
+      "sample_id": 34,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002571427.jpg",
+      "reference": "micro shot of the flowers",
+      "prediction": "white flowers of the white flower.",
+      "judge": {
+        "accuracy": 2,
+        "detail": 1,
+        "relevance": 3,
+        "fluency": 2,
+        "overall": 2,
+        "reason": "描述存在重复和模糊，未准确指出花朵种类，细节不足且语言不够流畅",
+        "_raw": "{\"accuracy\": 2, \"detail\": 1, \"relevance\": 3, \"fluency\": 2, \"overall\": 2, \"reason\": \"描述存在重复和模糊，未准确指出花朵种类，细节不足且语言不够流畅\"}"
+      }
+    },
+    {
+      "sample_id": 35,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000110809.jpg",
+      "reference": "fashion model and actor attend the oscar party hosted by magazine editor",
+      "prediction": "actor and actor attend the awards",
+      "judge": {
+        "accuracy": 2,
+        "detail": 1,
+        "relevance": 3,
+        "fluency": 4,
+        "overall": 2,
+        "reason": "候选描述过于简略且存在错误，将两人均称为'actor'不准确，未提及服装、场景等关键细节，但语言通顺",
+        "_raw": "{\"accuracy\": 2, \"detail\": 1, \"relevance\": 3, \"fluency\": 4, \"overall\": 2, \"reason\": \"候选描述过于简略且存在错误，将两人均称为'actor'不准确，未提及服装、场景等关键细节，但语言通顺\"}"
+      }
+    },
+    {
+      "sample_id": 36,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000036772.jpg",
+      "reference": "summer garden party in the grounds",
+      "prediction": "people walking in the city",
+      "judge": {
+        "accuracy": 3,
+        "detail": 2,
+        "relevance": 4,
+        "fluency": 5,
+        "overall": 3,
+        "reason": "候选描述基本正确但过于笼统，未体现公园场景和树木等关键细节",
+        "_raw": "{\"accuracy\": 3, \"detail\": 2, \"relevance\": 4, \"fluency\": 5, \"overall\": 3, \"reason\": \"候选描述基本正确但过于笼统，未体现公园场景和树木等关键细节\"}"
+      }
+    },
+    {
+      "sample_id": 37,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_001688358.jpg",
+      "reference": "table top shot of a little cake with fruits at the top",
+      "prediction": "a white cake with a layer of whipped cream and a scoop of vanilla ice cream",
+      "judge": {
+        "accuracy": 1,
+        "detail": 2,
+        "relevance": 3,
+        "fluency": 5,
+        "overall": 2,
+        "reason": "候选描述错误地将蛋糕上的椰蓉误认为是鲜奶油和香草冰淇淋，与图片内容严重不符",
+        "_raw": "{\"accuracy\": 1, \"detail\": 2, \"relevance\": 3, \"fluency\": 5, \"overall\": 2, \"reason\": \"候选描述错误地将蛋糕上的椰蓉误认为是鲜奶油和香草冰淇淋，与图片内容严重不符\"}"
+      }
+    },
+    {
+      "sample_id": 38,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002351920.jpg",
+      "reference": "delightful purple daisy flowers in black and white with a touch of color floral shower curtain .",
+      "prediction": "person - a dark grey shower curtain with pink and purple flowers",
+      "judge": {
+        "accuracy": 2,
+        "detail": 3,
+        "relevance": 3,
+        "fluency": 4,
+        "overall": 3,
+        "reason": "候选描述错误地将花的颜色描述为粉色和紫色，且未准确反映黑白背景与彩色花朵的对比效果，但基本物体识别正确，语言通顺",
+        "_raw": "{\"accuracy\": 2, \"detail\": 3, \"relevance\": 3, \"fluency\": 4, \"overall\": 3, \"reason\": \"候选描述错误地将花的颜色描述为粉色和紫色，且未准确反映黑白背景与彩色花朵的对比效果，但基本物体识别正确，语言通顺\"}"
+      }
+    },
+    {
+      "sample_id": 39,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000043879.jpg",
+      "reference": "seamless pattern collage of flags with shadows on a white background",
+      "prediction": "seamless pattern of the flag with a flag on it.",
+      "judge": {
+        "accuracy": 2,
+        "detail": 2,
+        "relevance": 3,
+        "fluency": 3,
+        "overall": 2,
+        "reason": "候选描述存在明显错误，如'flag with a flag on it'逻辑混乱且不符合图像内容，未能准确表达旗帜图案的重复性和背景特征",
+        "_raw": "{\"accuracy\": 2, \"detail\": 2, \"relevance\": 3, \"fluency\": 3, \"overall\": 2, \"reason\": \"候选描述存在明显错误，如'flag with a flag on it'逻辑混乱且不符合图像内容，未能准确表达旗帜图案的重复性和背景特征\"}"
+      }
+    },
+    {
+      "sample_id": 40,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000869045.jpg",
+      "reference": "reflection of a glorious day - photo by pop artist",
+      "prediction": "a reflection of the lake reflected in a pond",
+      "judge": {
+        "accuracy": 2,
+        "detail": 2,
+        "relevance": 3,
+        "fluency": 2,
+        "overall": 2,
+        "reason": "候选描述存在逻辑错误，'湖的倒影在池塘中'表述混乱且不符合图像实际，图像显示的是天空和周围景物在水面的倒影",
+        "_raw": "{\"accuracy\": 2, \"detail\": 2, \"relevance\": 3, \"fluency\": 2, \"overall\": 2, \"reason\": \"候选描述存在逻辑错误，'湖的倒影在池塘中'表述混乱且不符合图像实际，图像显示的是天空和周围景物在水面的倒影\"}"
+      }
+    },
+    {
+      "sample_id": 41,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_001869764.jpg",
+      "reference": "property image # lovely attic for square meters .",
+      "prediction": "property image # the house is in a quiet village with a beautiful view",
+      "judge": {
+        "accuracy": 1,
+        "detail": 1,
+        "relevance": 2,
+        "fluency": 5,
+        "overall": 2,
+        "reason": "候选描述提到房屋位于安静村庄且有美景，但图片仅显示厨房内部，无法验证外部环境，存在明显幻觉",
+        "_raw": "{\"accuracy\": 1, \"detail\": 1, \"relevance\": 2, \"fluency\": 5, \"overall\": 2, \"reason\": \"候选描述提到房屋位于安静村庄且有美景，但图片仅显示厨房内部，无法验证外部环境，存在明显幻觉\"}"
+      }
+    },
+    {
+      "sample_id": 42,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000321272.jpg",
+      "reference": "tops of birches with young spring leaves against the background of the blue sky in sunny day",
+      "prediction": "a view of a birch tree in the forest",
+      "judge": {
+        "accuracy": 3,
+        "detail": 2,
+        "relevance": 4,
+        "fluency": 5,
+        "overall": 3,
+        "reason": "候选描述基本正确但细节不足，未提及嫩叶和蓝天背景，且未说明是多棵白桦树的树冠",
+        "_raw": "{\"accuracy\": 3, \"detail\": 2, \"relevance\": 4, \"fluency\": 5, \"overall\": 3, \"reason\": \"候选描述基本正确但细节不足，未提及嫩叶和蓝天背景，且未说明是多棵白桦树的树冠\"}"
+      }
+    },
+    {
+      "sample_id": 43,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000086042.jpg",
+      "reference": "long wedding dress perfect for a bridesmaid , made from dusty pink silk veil , with precious application at the waist .",
+      "prediction": "this is a beautiful dress for the wedding of your dreams.",
+      "judge": {
+        "accuracy": 3,
+        "detail": 2,
+        "relevance": 4,
+        "fluency": 5,
+        "overall": 3,
+        "reason": "描述基本正确但缺乏具体细节，未提及颜色、材质和款式特征",
+        "_raw": "{\"accuracy\": 3, \"detail\": 2, \"relevance\": 4, \"fluency\": 5, \"overall\": 3, \"reason\": \"描述基本正确但缺乏具体细节，未提及颜色、材质和款式特征\"}"
+      }
+    },
+    {
+      "sample_id": 44,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000074316.jpg",
+      "reference": "v1467 pea coat sew along on the blog .",
+      "prediction": "how to sew a dress with the seams closed.",
+      "judge": {
+        "accuracy": 2,
+        "detail": 2,
+        "relevance": 3,
+        "fluency": 5,
+        "overall": 3,
+        "reason": "候选描述与图片内容不符，图片展示的是服装裁片而非缝制连衣裙的过程，但语言流畅且主题相关",
+        "_raw": "{\"accuracy\": 2, \"detail\": 2, \"relevance\": 3, \"fluency\": 5, \"overall\": 3, \"reason\": \"候选描述与图片内容不符，图片展示的是服装裁片而非缝制连衣裙的过程，但语言流畅且主题相关\"}"
+      }
+    },
+    {
+      "sample_id": 45,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002032943.jpg",
+      "reference": "hands touch typing on a laptop keyboard in the cafe",
+      "prediction": "close up of a man's hands typing on the laptop",
+      "judge": {
+        "accuracy": 4,
+        "detail": 3,
+        "relevance": 5,
+        "fluency": 5,
+        "overall": 4,
+        "reason": "候选描述基本准确，但未明确性别且缺少场景细节如咖啡馆环境",
+        "_raw": "{\"accuracy\": 4, \"detail\": 3, \"relevance\": 5, \"fluency\": 5, \"overall\": 4, \"reason\": \"候选描述基本准确，但未明确性别且缺少场景细节如咖啡馆环境\"}"
+      }
+    },
+    {
+      "sample_id": 46,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_001012951.jpg",
+      "reference": "have a good day vector illustration .",
+      "prediction": "have a good day lettering phrase on the background.",
+      "judge": {
+        "accuracy": 5,
+        "detail": 4,
+        "relevance": 5,
+        "fluency": 5,
+        "overall": 5,
+        "reason": "候选描述准确反映了图片中的文字内容和背景，语言流畅且切题，仅缺少对字体风格的细节描述。",
+        "_raw": "{\"accuracy\": 5, \"detail\": 4, \"relevance\": 5, \"fluency\": 5, \"overall\": 5, \"reason\": \"候选描述准确反映了图片中的文字内容和背景，语言流畅且切题，仅缺少对字体风格的细节描述。\"}"
+      }
+    },
+    {
+      "sample_id": 47,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_001892754.jpg",
+      "reference": "landmark flat colorful on a white background , vector design .",
+      "prediction": "vector illustration of a temple with the cityscape.",
+      "judge": {
+        "accuracy": 4,
+        "detail": 3,
+        "relevance": 4,
+        "fluency": 5,
+        "overall": 4,
+        "reason": "候选描述基本准确，但未提及扁平化风格、色彩和背景等关键视觉特征，细节略显不足",
+        "_raw": "{\"accuracy\": 4, \"detail\": 3, \"relevance\": 4, \"fluency\": 5, \"overall\": 4, \"reason\": \"候选描述基本准确，但未提及扁平化风格、色彩和背景等关键视觉特征，细节略显不足\"}"
+      }
+    },
+    {
+      "sample_id": 48,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002175851.jpg",
+      "reference": "christmas mass drew more people than last year , a sign of improved security , but many members of the congregation have fled federal republic .",
+      "prediction": "the interior of the cathedral.",
+      "judge": {
+        "accuracy": 5,
+        "detail": 2,
+        "relevance": 5,
+        "fluency": 5,
+        "overall": 4,
+        "reason": "候选描述准确但过于简略，未涵盖教堂内部的装饰、人群和宗教氛围等关键细节",
+        "_raw": "{\"accuracy\": 5, \"detail\": 2, \"relevance\": 5, \"fluency\": 5, \"overall\": 4, \"reason\": \"候选描述准确但过于简略，未涵盖教堂内部的装饰、人群和宗教氛围等关键细节\"}"
+      }
+    },
+    {
+      "sample_id": 49,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002570651.jpg",
+      "reference": "preparing hexagons using patterns from book",
+      "prediction": "a new way to organize your books",
+      "judge": {
+        "accuracy": 1,
+        "detail": 1,
+        "relevance": 1,
+        "fluency": 5,
+        "overall": 1,
+        "reason": "候选描述与图片内容严重不符，图片展示的是缝纫材料和图案书，而非书籍整理方法",
+        "_raw": "{\"accuracy\": 1, \"detail\": 1, \"relevance\": 1, \"fluency\": 5, \"overall\": 1, \"reason\": \"候选描述与图片内容严重不符，图片展示的是缝纫材料和图案书，而非书籍整理方法\"}"
+      }
+    },
+    {
+      "sample_id": 50,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000533241.jpg",
+      "reference": "american football player looks on during a football game circa page played for sports team",
+      "prediction": "american football player during a game against sports team",
+      "judge": {
+        "accuracy": 4,
+        "detail": 3,
+        "relevance": 4,
+        "fluency": 5,
+        "overall": 4,
+        "reason": "候选描述基本准确，但缺少具体球队和球员号码等关键细节，且未明确对手信息",
+        "_raw": "{\"accuracy\": 4, \"detail\": 3, \"relevance\": 4, \"fluency\": 5, \"overall\": 4, \"reason\": \"候选描述基本准确，但缺少具体球队和球员号码等关键细节，且未明确对手信息\"}"
+      }
+    },
+    {
+      "sample_id": 51,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002358994.jpg",
+      "reference": "the sleeping in the jungle",
+      "prediction": "a baby iguana in a tree",
+      "judge": {
+        "accuracy": 3,
+        "detail": 2,
+        "relevance": 4,
+        "fluency": 5,
+        "overall": 3,
+        "reason": "候选描述基本正确，但未准确指出是成年鬣蜥而非幼体，且缺少环境细节",
+        "_raw": "{\"accuracy\": 3, \"detail\": 2, \"relevance\": 4, \"fluency\": 5, \"overall\": 3, \"reason\": \"候选描述基本正确，但未准确指出是成年鬣蜥而非幼体，且缺少环境细节\"}"
+      }
+    },
+    {
+      "sample_id": 52,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002635958.jpg",
+      "reference": "couch my husband gave me as a birthday gift ~",
+      "prediction": "a couch in a dark brown leather and cream color.",
+      "judge": {
+        "accuracy": 4,
+        "detail": 3,
+        "relevance": 5,
+        "fluency": 5,
+        "overall": 4,
+        "reason": "描述基本准确，但未提及靠垫颜色和背景画作等细节，且‘cream color’表述不够精确",
+        "_raw": "{\"accuracy\": 4, \"detail\": 3, \"relevance\": 5, \"fluency\": 5, \"overall\": 4, \"reason\": \"描述基本准确，但未提及靠垫颜色和背景画作等细节，且‘cream color’表述不够精确\"}"
+      }
+    },
+    {
+      "sample_id": 53,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000871514.jpg",
+      "reference": "the city in its entirety is listed along with its lagoon .",
+      "prediction": "tourist boat on the canal",
+      "judge": {
+        "accuracy": 4,
+        "detail": 3,
+        "relevance": 4,
+        "fluency": 5,
+        "overall": 4,
+        "reason": "候选描述准确指出了运河上的游船，但缺少对周围建筑、人群和场景氛围等细节的描述",
+        "_raw": "{\"accuracy\": 4, \"detail\": 3, \"relevance\": 4, \"fluency\": 5, \"overall\": 4, \"reason\": \"候选描述准确指出了运河上的游船，但缺少对周围建筑、人群和场景氛围等细节的描述\"}"
+      }
+    },
+    {
+      "sample_id": 54,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_001003537.jpg",
+      "reference": "job title with people demonstrating the joy of giving handing a gift to a young person",
+      "prediction": "politician and actor talking to a group of people",
+      "judge": {
+        "accuracy": 2,
+        "detail": 2,
+        "relevance": 3,
+        "fluency": 5,
+        "overall": 3,
+        "reason": "候选描述将人物误判为政治家和演员，且未提及关键细节如礼物和互动场景，但语言流畅且基本相关",
+        "_raw": "{\"accuracy\": 2, \"detail\": 2, \"relevance\": 3, \"fluency\": 5, \"overall\": 3, \"reason\": \"候选描述将人物误判为政治家和演员，且未提及关键细节如礼物和互动场景，但语言流畅且基本相关\"}"
+      }
+    },
+    {
+      "sample_id": 55,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_001859227.jpg",
+      "reference": "athlete controls the ball during the group b match .",
+      "prediction": "football player of the team during a match.",
+      "judge": {
+        "accuracy": 4,
+        "detail": 3,
+        "relevance": 5,
+        "fluency": 5,
+        "overall": 4,
+        "reason": "候选描述基本准确，但缺少具体细节如球员动作和球衣号码，整体表达流畅且切题。",
+        "_raw": "{\"accuracy\": 4, \"detail\": 3, \"relevance\": 5, \"fluency\": 5, \"overall\": 4, \"reason\": \"候选描述基本准确，但缺少具体细节如球员动作和球衣号码，整体表达流畅且切题。\"}"
+      }
+    },
+    {
+      "sample_id": 56,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_001163525.jpg",
+      "reference": "image : a view of the street art and graffiti exhibition",
+      "prediction": "a graffiti - painted car is on display in the lobby of a building.",
+      "judge": {
+        "accuracy": 5,
+        "detail": 4,
+        "relevance": 5,
+        "fluency": 5,
+        "overall": 5,
+        "reason": "候选描述准确反映了图片中涂鸦汽车在室内展示的场景，细节丰富且语言流畅，与图像内容高度一致。",
+        "_raw": "{\"accuracy\": 5, \"detail\": 4, \"relevance\": 5, \"fluency\": 5, \"overall\": 5, \"reason\": \"候选描述准确反映了图片中涂鸦汽车在室内展示的场景，细节丰富且语言流畅，与图像内容高度一致。\"}"
+      }
+    },
+    {
+      "sample_id": 57,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_001859560.jpg",
+      "reference": "pencil and watercolor drawing of little girl flying among the clouds",
+      "prediction": "drawing of a little girl in ballet costume on white background.",
+      "judge": {
+        "accuracy": 4,
+        "detail": 3,
+        "relevance": 5,
+        "fluency": 5,
+        "overall": 4,
+        "reason": "候选描述基本准确，但未提及云朵和绘画风格等关键细节",
+        "_raw": "{\"accuracy\": 4, \"detail\": 3, \"relevance\": 5, \"fluency\": 5, \"overall\": 4, \"reason\": \"候选描述基本准确，但未提及云朵和绘画风格等关键细节\"}"
+      }
+    },
+    {
+      "sample_id": 58,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000268151.jpg",
+      "reference": "make the most of your kitchen space !",
+      "prediction": "kitchen with a view of the garden",
+      "judge": {
+        "accuracy": 3,
+        "detail": 2,
+        "relevance": 4,
+        "fluency": 5,
+        "overall": 3,
+        "reason": "候选描述提到'花园景色'，但图片中仅可见窗外部分绿植，无法确认为花园，因此准确性有限；细节描述不足，未提及厨房布局、家具等关键元素；语言流畅且切题。",
+        "_raw": "{\"accuracy\": 3, \"detail\": 2, \"relevance\": 4, \"fluency\": 5, \"overall\": 3, \"reason\": \"候选描述提到'花园景色'，但图片中仅可见窗外部分绿植，无法确认为花园，因此准确性有限；细节描述不足，未提及厨房布局、家具等关键元素；语言流畅且切题。\"}"
+      }
+    },
+    {
+      "sample_id": 59,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002789234.jpg",
+      "reference": "adult woman , dye , tenderly hugs her old mother on a couch",
+      "prediction": "elderly woman with her granddaughter in a hospital bed",
+      "judge": {
+        "accuracy": 1,
+        "detail": 1,
+        "relevance": 1,
+        "fluency": 5,
+        "overall": 1,
+        "reason": "候选描述错误地将场景设定为医院病床，并误认人物关系为祖孙，与图片中两人在沙发上亲密相拥的现实不符",
+        "_raw": "{\"accuracy\": 1, \"detail\": 1, \"relevance\": 1, \"fluency\": 5, \"overall\": 1, \"reason\": \"候选描述错误地将场景设定为医院病床，并误认人物关系为祖孙，与图片中两人在沙发上亲密相拥的现实不符\"}"
+      }
+    },
+    {
+      "sample_id": 60,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000580608.jpg",
+      "reference": "person was trapped in that timeless state of the stormy sea where she 'd drowned .",
+      "prediction": "the ocean is a vast and mysterious place.",
+      "judge": {
+        "accuracy": 3,
+        "detail": 2,
+        "relevance": 4,
+        "fluency": 5,
+        "overall": 3,
+        "reason": "候选描述基本正确但过于笼统，未体现海面波涛汹涌和天空阴沉等关键细节",
+        "_raw": "{\"accuracy\": 3, \"detail\": 2, \"relevance\": 4, \"fluency\": 5, \"overall\": 3, \"reason\": \"候选描述基本正确但过于笼统，未体现海面波涛汹涌和天空阴沉等关键细节\"}"
+      }
+    },
+    {
+      "sample_id": 61,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000128039.jpg",
+      "reference": "bliss is a beer and a game of cards looking over the ocean as the sun sets in the distance .",
+      "prediction": "sunset over the sea",
+      "judge": {
+        "accuracy": 5,
+        "detail": 3,
+        "relevance": 5,
+        "fluency": 5,
+        "overall": 4,
+        "reason": "候选描述准确概括了日落海景，但缺少细节如太阳位置、云层和水面反光等",
+        "_raw": "{\"accuracy\": 5, \"detail\": 3, \"relevance\": 5, \"fluency\": 5, \"overall\": 4, \"reason\": \"候选描述准确概括了日落海景，但缺少细节如太阳位置、云层和水面反光等\"}"
+      }
+    },
+    {
+      "sample_id": 62,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000077739.jpg",
+      "reference": "some forms of sculpture take a bit more patience than others .",
+      "prediction": "bonsai trees are a great way to add some greenery to your home.",
+      "judge": {
+        "accuracy": 3,
+        "detail": 2,
+        "relevance": 4,
+        "fluency": 5,
+        "overall": 3,
+        "reason": "候选描述基本正确但过于泛化，未体现图片中多样的盆景形态和艺术性细节",
+        "_raw": "{\"accuracy\": 3, \"detail\": 2, \"relevance\": 4, \"fluency\": 5, \"overall\": 3, \"reason\": \"候选描述基本正确但过于泛化，未体现图片中多样的盆景形态和艺术性细节\"}"
+      }
+    },
+    {
+      "sample_id": 63,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_001764347.jpg",
+      "reference": "vector illustration of a christmas background with stars",
+      "prediction": "christmas background with stars and snowflakes.",
+      "judge": {
+        "accuracy": 3,
+        "detail": 3,
+        "relevance": 4,
+        "fluency": 5,
+        "overall": 4,
+        "reason": "候选描述基本正确，但图片中没有雪flake，只有星星，因此存在轻微幻觉",
+        "_raw": "{\"accuracy\": 3, \"detail\": 3, \"relevance\": 4, \"fluency\": 5, \"overall\": 4, \"reason\": \"候选描述基本正确，但图片中没有雪flake，只有星星，因此存在轻微幻觉\"}"
+      }
+    },
+    {
+      "sample_id": 64,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000506264.jpg",
+      "reference": "person of the 60s & 70s",
+      "prediction": "a sculpture of a man with his head in the palm of his hand.",
+      "judge": {
+        "accuracy": 1,
+        "detail": 2,
+        "relevance": 2,
+        "fluency": 5,
+        "overall": 2,
+        "reason": "候选描述与图片内容严重不符，图中为三座抽象雕塑而非一个人物手托头部的雕像",
+        "_raw": "{\"accuracy\": 1, \"detail\": 2, \"relevance\": 2, \"fluency\": 5, \"overall\": 2, \"reason\": \"候选描述与图片内容严重不符，图中为三座抽象雕塑而非一个人物手托头部的雕像\"}"
+      }
+    },
+    {
+      "sample_id": 65,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002094333.jpg",
+      "reference": "a city can be considered another master with it 's sitting area and ensuite bathroom also .",
+      "prediction": "property image # 100% of the property",
+      "judge": {
+        "accuracy": 1,
+        "detail": 1,
+        "relevance": 1,
+        "fluency": 2,
+        "overall": 1,
+        "reason": "候选描述完全不符合图片内容，未提及任何实际物体或场景细节，且语言表达模糊无意义",
+        "_raw": "{\"accuracy\": 1, \"detail\": 1, \"relevance\": 1, \"fluency\": 2, \"overall\": 1, \"reason\": \"候选描述完全不符合图片内容，未提及任何实际物体或场景细节，且语言表达模糊无意义\"}"
+      }
+    },
+    {
+      "sample_id": 66,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000601258.jpg",
+      "reference": "sometimes we all need a helping hand - the carrier 's kilt looks like a divided skirt .",
+      "prediction": "person and person are the best of friends.",
+      "judge": {
+        "accuracy": 1,
+        "detail": 1,
+        "relevance": 1,
+        "fluency": 4,
+        "overall": 1,
+        "reason": "候选描述完全不符合图片内容，未提及任何可见元素，仅表达模糊关系，缺乏事实依据",
+        "_raw": "{\"accuracy\": 1, \"detail\": 1, \"relevance\": 1, \"fluency\": 4, \"overall\": 1, \"reason\": \"候选描述完全不符合图片内容，未提及任何可见元素，仅表达模糊关系，缺乏事实依据\"}"
+      }
+    },
+    {
+      "sample_id": 67,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_001127835.jpg",
+      "reference": "christmas design with a blue background with snowflakes and greetings",
+      "prediction": "christmas greeting card with a snowflake design.",
+      "judge": {
+        "accuracy": 4,
+        "detail": 3,
+        "relevance": 5,
+        "fluency": 5,
+        "overall": 4,
+        "reason": "候选描述基本准确，提到了圣诞贺卡和雪花设计，但未提及蓝色背景和具体文字内容，细节略显不足",
+        "_raw": "{\"accuracy\": 4, \"detail\": 3, \"relevance\": 5, \"fluency\": 5, \"overall\": 4, \"reason\": \"候选描述基本准确，提到了圣诞贺卡和雪花设计，但未提及蓝色背景和具体文字内容，细节略显不足\"}"
+      }
+    },
+    {
+      "sample_id": 68,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002082159.jpg",
+      "reference": "model and actor attend the fall fashion show during fashion week in the salon .",
+      "prediction": "pop artist and person attend the fall show.",
+      "judge": {
+        "accuracy": 2,
+        "detail": 2,
+        "relevance": 3,
+        "fluency": 4,
+        "overall": 3,
+        "reason": "候选描述基本正确但过于模糊，未准确识别人物身份和具体场景细节，语言通顺但信息量不足",
+        "_raw": "{\"accuracy\": 2, \"detail\": 2, \"relevance\": 3, \"fluency\": 4, \"overall\": 3, \"reason\": \"候选描述基本正确但过于模糊，未准确识别人物身份和具体场景细节，语言通顺但信息量不足\"}"
+      }
+    },
+    {
+      "sample_id": 69,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002594084.jpg",
+      "reference": "starting pitcher # delivers a pitch in the first inning against sports team .",
+      "prediction": "# pitches against sports team during the first inning of a baseball game.",
+      "judge": {
+        "accuracy": 4,
+        "detail": 3,
+        "relevance": 5,
+        "fluency": 5,
+        "overall": 4,
+        "reason": "候选描述基本准确，但缺少球员号码和球队名称等关键细节，且未明确指出投手身份",
+        "_raw": "{\"accuracy\": 4, \"detail\": 3, \"relevance\": 5, \"fluency\": 5, \"overall\": 4, \"reason\": \"候选描述基本准确，但缺少球员号码和球队名称等关键细节，且未明确指出投手身份\"}"
+      }
+    },
+    {
+      "sample_id": 70,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000791721.jpg",
+      "reference": "turtle on a rock face to face with a plastic pipe , everything is reflected in the mirror of the water",
+      "prediction": "turtle drinking water from a glass bottle",
+      "judge": {
+        "accuracy": 1,
+        "detail": 1,
+        "relevance": 1,
+        "fluency": 4,
+        "overall": 1,
+        "reason": "候选描述完全错误，图中没有玻璃瓶，乌龟也没有喝水，而是静止在水中，旁边有塑料桶和倒影",
+        "_raw": "{\"accuracy\": 1, \"detail\": 1, \"relevance\": 1, \"fluency\": 4, \"overall\": 1, \"reason\": \"候选描述完全错误，图中没有玻璃瓶，乌龟也没有喝水，而是静止在水中，旁边有塑料桶和倒影\"}"
+      }
+    },
+    {
+      "sample_id": 71,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002023425.jpg",
+      "reference": "access to the loft bed is easy because there 's a proper staircase .",
+      "prediction": "a bedroom with a staircase",
+      "judge": {
+        "accuracy": 4,
+        "detail": 3,
+        "relevance": 5,
+        "fluency": 5,
+        "overall": 4,
+        "reason": "候选描述基本准确，但缺少对楼梯细节和阁楼床的明确描述，信息较为简略",
+        "_raw": "{\"accuracy\": 4, \"detail\": 3, \"relevance\": 5, \"fluency\": 5, \"overall\": 4, \"reason\": \"候选描述基本准确，但缺少对楼梯细节和阁楼床的明确描述，信息较为简略\"}"
+      }
+    },
+    {
+      "sample_id": 72,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002039161.jpg",
+      "reference": "stop on by for the best selection of sweaters and dresses for your holiday parties !",
+      "prediction": "christmas dresses for the holiday season",
+      "judge": {
+        "accuracy": 5,
+        "detail": 3,
+        "relevance": 5,
+        "fluency": 5,
+        "overall": 4,
+        "reason": "候选描述准确指出了图片中的圣诞主题连衣裙，但未提及具体款式细节如红白条纹或绿色配饰",
+        "_raw": "{\"accuracy\": 5, \"detail\": 3, \"relevance\": 5, \"fluency\": 5, \"overall\": 4, \"reason\": \"候选描述准确指出了图片中的圣诞主题连衣裙，但未提及具体款式细节如红白条纹或绿色配饰\"}"
+      }
+    },
+    {
+      "sample_id": 73,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000854999.jpg",
+      "reference": "want to furnish your home and get organized at the same time ? tv network rounds up smart furniture pieces that double as storage space .",
+      "prediction": "this is a great way to keep shoes and socks in the closet.",
+      "judge": {
+        "accuracy": 3,
+        "detail": 2,
+        "relevance": 3,
+        "fluency": 5,
+        "overall": 3,
+        "reason": "候选描述部分正确，但未准确反映图片中的家具功能（如储物柜兼作鞋架），且忽略了其作为多功能家具的特性，细节描述不足。",
+        "_raw": "{\"accuracy\": 3, \"detail\": 2, \"relevance\": 3, \"fluency\": 5, \"overall\": 3, \"reason\": \"候选描述部分正确，但未准确反映图片中的家具功能（如储物柜兼作鞋架），且忽略了其作为多功能家具的特性，细节描述不足。\"}"
+      }
+    },
+    {
+      "sample_id": 74,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002471132.jpg",
+      "reference": "fans dressed up for this morning 's fan event .",
+      "prediction": "the family of person, who was born in 1980 and died at the age of 23.",
+      "judge": {
+        "accuracy": 1,
+        "detail": 1,
+        "relevance": 1,
+        "fluency": 2,
+        "overall": 1,
+        "reason": "候选描述与图片内容完全不符，图片中是穿着角色扮演服装的人群，而非提及的死亡信息，存在严重事实错误和无关内容。",
+        "_raw": "{\"accuracy\": 1, \"detail\": 1, \"relevance\": 1, \"fluency\": 2, \"overall\": 1, \"reason\": \"候选描述与图片内容完全不符，图片中是穿着角色扮演服装的人群，而非提及的死亡信息，存在严重事实错误和无关内容。\"}"
+      }
+    },
+    {
+      "sample_id": 75,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_001027552.jpg",
+      "reference": "red leather wallet with dollars and credit cards .",
+      "prediction": "wallet with money and credit card on a red leather bag",
+      "judge": {
+        "accuracy": 3,
+        "detail": 3,
+        "relevance": 4,
+        "fluency": 4,
+        "overall": 3,
+        "reason": "候选描述基本正确但存在细节偏差，如将钱包误述为‘红皮包’，且未准确描述钱包的打开状态和卡片数量",
+        "_raw": "{\"accuracy\": 3, \"detail\": 3, \"relevance\": 4, \"fluency\": 4, \"overall\": 3, \"reason\": \"候选描述基本正确但存在细节偏差，如将钱包误述为‘红皮包’，且未准确描述钱包的打开状态和卡片数量\"}"
+      }
+    },
+    {
+      "sample_id": 76,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000400452.jpg",
+      "reference": "outside in the park a man is putting money of euros in his back pocket",
+      "prediction": "a man with a bank note in his pocket",
+      "judge": {
+        "accuracy": 5,
+        "detail": 3,
+        "relevance": 5,
+        "fluency": 5,
+        "overall": 4,
+        "reason": "描述准确，但缺少具体货币类型和场景细节",
+        "_raw": "{\"accuracy\": 5, \"detail\": 3, \"relevance\": 5, \"fluency\": 5, \"overall\": 4, \"reason\": \"描述准确，但缺少具体货币类型和场景细节\"}"
+      }
+    },
+    {
+      "sample_id": 77,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_001873004.jpg",
+      "reference": "snowfall in a winter park with snow covered trees",
+      "prediction": "snow in the forest",
+      "judge": {
+        "accuracy": 5,
+        "detail": 3,
+        "relevance": 5,
+        "fluency": 5,
+        "overall": 4,
+        "reason": "候选描述准确反映了雪景森林的场景，语言流畅且切题，但细节描述较为简略",
+        "_raw": "{\"accuracy\": 5, \"detail\": 3, \"relevance\": 5, \"fluency\": 5, \"overall\": 4, \"reason\": \"候选描述准确反映了雪景森林的场景，语言流畅且切题，但细节描述较为简略\"}"
+      }
+    },
+    {
+      "sample_id": 78,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002357575.jpg",
+      "reference": "a seller in the fish market of a city weighs fish on a scale and makes a further suggestion for a couple",
+      "prediction": "a fisherman selling his catch at a market",
+      "judge": {
+        "accuracy": 3,
+        "detail": 2,
+        "relevance": 4,
+        "fluency": 5,
+        "overall": 3,
+        "reason": "候选描述基本正确但过于简化，未提及摊主称重和顾客互动等关键细节",
+        "_raw": "{\"accuracy\": 3, \"detail\": 2, \"relevance\": 4, \"fluency\": 5, \"overall\": 3, \"reason\": \"候选描述基本正确但过于简化，未提及摊主称重和顾客互动等关键细节\"}"
+      }
+    },
+    {
+      "sample_id": 79,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_001700395.jpg",
+      "reference": "cricket fans during the final cricket match against cricket team",
+      "prediction": "fans watch cricket player during the match.",
+      "judge": {
+        "accuracy": 3,
+        "detail": 2,
+        "relevance": 4,
+        "fluency": 5,
+        "overall": 3,
+        "reason": "候选描述基本正确但过于笼统，未体现观众穿着国家队服装、国旗等关键细节，且未明确比赛阶段",
+        "_raw": "{\"accuracy\": 3, \"detail\": 2, \"relevance\": 4, \"fluency\": 5, \"overall\": 3, \"reason\": \"候选描述基本正确但过于笼统，未体现观众穿着国家队服装、国旗等关键细节，且未明确比赛阶段\"}"
+      }
+    },
+    {
+      "sample_id": 80,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000894380.jpg",
+      "reference": "teenagers wade in the shallows at the beach .",
+      "prediction": "children playing in the sea",
+      "judge": {
+        "accuracy": 4,
+        "detail": 3,
+        "relevance": 4,
+        "fluency": 5,
+        "overall": 4,
+        "reason": "候选描述基本准确，但将青少年称为'children'略显不精确，且未提及浅水区和沙滩细节",
+        "_raw": "{\"accuracy\": 4, \"detail\": 3, \"relevance\": 4, \"fluency\": 5, \"overall\": 4, \"reason\": \"候选描述基本准确，但将青少年称为'children'略显不精确，且未提及浅水区和沙滩细节\"}"
+      }
+    },
+    {
+      "sample_id": 81,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_001768633.jpg",
+      "reference": "detail of base of fluted column at the archaeological site of unesco world heritage site",
+      "prediction": "a column of the ancient temple",
+      "judge": {
+        "accuracy": 4,
+        "detail": 3,
+        "relevance": 5,
+        "fluency": 5,
+        "overall": 4,
+        "reason": "候选描述基本准确，但缺少柱子的凹槽细节和考古遗址背景，语言流畅且切题",
+        "_raw": "{\"accuracy\": 4, \"detail\": 3, \"relevance\": 5, \"fluency\": 5, \"overall\": 4, \"reason\": \"候选描述基本准确，但缺少柱子的凹槽细节和考古遗址背景，语言流畅且切题\"}"
+      }
+    },
+    {
+      "sample_id": 82,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000353618.jpg",
+      "reference": "beautiful lady in a black hat and a red jacket holds a perfume bottle",
+      "prediction": "young woman in a black hat and wearing a cocktail dress with a bottle of champagne",
+      "judge": {
+        "accuracy": 1,
+        "detail": 2,
+        "relevance": 2,
+        "fluency": 5,
+        "overall": 2,
+        "reason": "候选描述错误地将红色夹克描述为鸡尾酒裙，并将香水瓶误认为香槟瓶，与图像内容严重不符",
+        "_raw": "{\"accuracy\": 1, \"detail\": 2, \"relevance\": 2, \"fluency\": 5, \"overall\": 2, \"reason\": \"候选描述错误地将红色夹克描述为鸡尾酒裙，并将香水瓶误认为香槟瓶，与图像内容严重不符\"}"
+      }
+    },
+    {
+      "sample_id": 83,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000096306.jpg",
+      "reference": "golfer poses with the trophy",
+      "prediction": "golfer poses with the trophy after winning golf competition",
+      "judge": {
+        "accuracy": 5,
+        "detail": 4,
+        "relevance": 5,
+        "fluency": 5,
+        "overall": 5,
+        "reason": "候选描述准确反映了图片内容，虽未提及具体环境细节，但核心信息完整且语言流畅自然。",
+        "_raw": "{\"accuracy\": 5, \"detail\": 4, \"relevance\": 5, \"fluency\": 5, \"overall\": 5, \"reason\": \"候选描述准确反映了图片内容，虽未提及具体环境细节，但核心信息完整且语言流畅自然。\"}"
+      }
+    },
+    {
+      "sample_id": 84,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002601627.jpg",
+      "reference": "blade bronze boat with a flat bottom , length - 12m",
+      "prediction": "a sailboat illustration of a yacht",
+      "judge": {
+        "accuracy": 4,
+        "detail": 3,
+        "relevance": 5,
+        "fluency": 5,
+        "overall": 4,
+        "reason": "候选描述准确指出图像为帆船游艇的插图，但缺少具体型号和结构细节，整体表达清晰且切题",
+        "_raw": "{\"accuracy\": 4, \"detail\": 3, \"relevance\": 5, \"fluency\": 5, \"overall\": 4, \"reason\": \"候选描述准确指出图像为帆船游艇的插图，但缺少具体型号和结构细节，整体表达清晰且切题\"}"
+      }
+    },
+    {
+      "sample_id": 85,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002445061.jpg",
+      "reference": "need more storage space ? you may already have the space you need between the studs , behind a wall , or under the stairs .",
+      "prediction": "how to make a dresser with drawers",
+      "judge": {
+        "accuracy": 1,
+        "detail": 1,
+        "relevance": 1,
+        "fluency": 5,
+        "overall": 1,
+        "reason": "候选描述与图片内容严重不符，图片展示的是一个带有抽屉的白色衣柜，而非制作梳妆台的教程",
+        "_raw": "{\"accuracy\": 1, \"detail\": 1, \"relevance\": 1, \"fluency\": 5, \"overall\": 1, \"reason\": \"候选描述与图片内容严重不符，图片展示的是一个带有抽屉的白色衣柜，而非制作梳妆台的教程\"}"
+      }
+    },
+    {
+      "sample_id": 86,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002241765.jpg",
+      "reference": "this dress has all the flattering style of a wrap dress without the work",
+      "prediction": "a floral dress with a floral print and lace trim",
+      "judge": {
+        "accuracy": 3,
+        "detail": 2,
+        "relevance": 4,
+        "fluency": 5,
+        "overall": 3,
+        "reason": "描述基本正确但不够准确，未提及裹身裙结构和深色底色，且‘lace trim’无明显证据",
+        "_raw": "{\"accuracy\": 3, \"detail\": 2, \"relevance\": 4, \"fluency\": 5, \"overall\": 3, \"reason\": \"描述基本正确但不够准确，未提及裹身裙结构和深色底色，且‘lace trim’无明显证据\"}"
+      }
+    },
+    {
+      "sample_id": 87,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002070216.jpg",
+      "reference": "whether illuminating the hallway or brightening the bathroom , this - light semi flush mount brings a touch of contemporary charm to any room in your home .",
+      "prediction": "this pendant light is a great way to add some personality to your home.",
+      "judge": {
+        "accuracy": 2,
+        "detail": 2,
+        "relevance": 3,
+        "fluency": 5,
+        "overall": 3,
+        "reason": "候选描述将灯具误认为吊灯，实际为半吸顶灯，且未提及关键特征如灯罩材质和金属底座",
+        "_raw": "{\"accuracy\": 2, \"detail\": 2, \"relevance\": 3, \"fluency\": 5, \"overall\": 3, \"reason\": \"候选描述将灯具误认为吊灯，实际为半吸顶灯，且未提及关键特征如灯罩材质和金属底座\"}"
+      }
+    },
+    {
+      "sample_id": 88,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000134989.jpg",
+      "reference": "person on investors in outer harbor",
+      "prediction": "a view of the harbour from a boat",
+      "judge": {
+        "accuracy": 3,
+        "detail": 2,
+        "relevance": 4,
+        "fluency": 5,
+        "overall": 3,
+        "reason": "候选描述基本正确但过于笼统，未提及关键的帆船和码头细节，且视角描述不够准确",
+        "_raw": "{\"accuracy\": 3, \"detail\": 2, \"relevance\": 4, \"fluency\": 5, \"overall\": 3, \"reason\": \"候选描述基本正确但过于笼统，未提及关键的帆船和码头细节，且视角描述不够准确\"}"
+      }
+    },
+    {
+      "sample_id": 89,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002256542.jpg",
+      "reference": "sugar cubes in a glass bowl with tongs",
+      "prediction": "a bowl of sugar cubes",
+      "judge": {
+        "accuracy": 5,
+        "detail": 3,
+        "relevance": 5,
+        "fluency": 5,
+        "overall": 4,
+        "reason": "候选描述准确表达了图片核心内容，但缺少夹子和玻璃碗等细节",
+        "_raw": "{\"accuracy\": 5, \"detail\": 3, \"relevance\": 5, \"fluency\": 5, \"overall\": 4, \"reason\": \"候选描述准确表达了图片核心内容，但缺少夹子和玻璃碗等细节\"}"
+      }
+    },
+    {
+      "sample_id": 90,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000292367.jpg",
+      "reference": "summer view through person near village",
+      "prediction": "a stream in a forest",
+      "judge": {
+        "accuracy": 5,
+        "detail": 3,
+        "relevance": 5,
+        "fluency": 5,
+        "overall": 4,
+        "reason": "候选描述准确反映了图片中的溪流和森林场景，语言流畅且切题，但细节描述较为简略",
+        "_raw": "{\"accuracy\": 5, \"detail\": 3, \"relevance\": 5, \"fluency\": 5, \"overall\": 4, \"reason\": \"候选描述准确反映了图片中的溪流和森林场景，语言流畅且切题，但细节描述较为简略\"}"
+      }
+    },
+    {
+      "sample_id": 91,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002360537.jpg",
+      "reference": "a to z of jazz",
+      "prediction": "a to the jazz band",
+      "judge": {
+        "accuracy": 1,
+        "detail": 1,
+        "relevance": 2,
+        "fluency": 3,
+        "overall": 1,
+        "reason": "候选描述与图片内容严重不符，图片展示的是《A to Z of Jazz》专辑封面，而非爵士乐队，且'jazz band'并非图中主要元素",
+        "_raw": "{\"accuracy\": 1, \"detail\": 1, \"relevance\": 2, \"fluency\": 3, \"overall\": 1, \"reason\": \"候选描述与图片内容严重不符，图片展示的是《A to Z of Jazz》专辑封面，而非爵士乐队，且'jazz band'并非图中主要元素\"}"
+      }
+    },
+    {
+      "sample_id": 92,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002425182.jpg",
+      "reference": "agricultural fields in the mountain valley",
+      "prediction": "aerial view of a rice field",
+      "judge": {
+        "accuracy": 2,
+        "detail": 2,
+        "relevance": 3,
+        "fluency": 5,
+        "overall": 3,
+        "reason": "候选描述错误地将农田识别为稻田且视角为航拍，实际为地面视角的作物种植区，非水稻，但语言流畅且基本相关",
+        "_raw": "{\"accuracy\": 2, \"detail\": 2, \"relevance\": 3, \"fluency\": 5, \"overall\": 3, \"reason\": \"候选描述错误地将农田识别为稻田且视角为航拍，实际为地面视角的作物种植区，非水稻，但语言流畅且基本相关\"}"
+      }
+    },
+    {
+      "sample_id": 93,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000911260.jpg",
+      "reference": "horse riders in the evening on a beach",
+      "prediction": "a sunset over the sea",
+      "judge": {
+        "accuracy": 4,
+        "detail": 3,
+        "relevance": 5,
+        "fluency": 5,
+        "overall": 4,
+        "reason": "候选描述准确捕捉了日落和海洋的场景，但缺少对岸边地形和远处船只等细节的描述",
+        "_raw": "{\"accuracy\": 4, \"detail\": 3, \"relevance\": 5, \"fluency\": 5, \"overall\": 4, \"reason\": \"候选描述准确捕捉了日落和海洋的场景，但缺少对岸边地形和远处船只等细节的描述\"}"
+      }
+    },
+    {
+      "sample_id": 94,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002391342.jpg",
+      "reference": "paint brush with wooden handle of a human hand",
+      "prediction": "hand holding a paintbrush",
+      "judge": {
+        "accuracy": 5,
+        "detail": 4,
+        "relevance": 5,
+        "fluency": 5,
+        "overall": 5,
+        "reason": "候选描述准确表达了图像内容，语言流畅且切题，仅缺少对画笔材质的细节描述",
+        "_raw": "{\"accuracy\": 5, \"detail\": 4, \"relevance\": 5, \"fluency\": 5, \"overall\": 5, \"reason\": \"候选描述准确表达了图像内容，语言流畅且切题，仅缺少对画笔材质的细节描述\"}"
+      }
+    },
+    {
+      "sample_id": 95,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_002774597.jpg",
+      "reference": "the pulse of a river",
+      "prediction": "a kayak on the river",
+      "judge": {
+        "accuracy": 5,
+        "detail": 3,
+        "relevance": 5,
+        "fluency": 5,
+        "overall": 4,
+        "reason": "描述准确，语言流畅，但细节略显简略",
+        "_raw": "{\"accuracy\": 5, \"detail\": 3, \"relevance\": 5, \"fluency\": 5, \"overall\": 4, \"reason\": \"描述准确，语言流畅，但细节略显简略\"}"
+      }
+    },
+    {
+      "sample_id": 96,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000012440.jpg",
+      "reference": "the opening day of trout season along the shores .",
+      "prediction": "people walk along the shore of a lake.",
+      "judge": {
+        "accuracy": 3,
+        "detail": 2,
+        "relevance": 4,
+        "fluency": 5,
+        "overall": 3,
+        "reason": "描述基本正确但过于简略，未体现钓鱼活动和码头等关键细节",
+        "_raw": "{\"accuracy\": 3, \"detail\": 2, \"relevance\": 4, \"fluency\": 5, \"overall\": 3, \"reason\": \"描述基本正确但过于简略，未体现钓鱼活动和码头等关键细节\"}"
+      }
+    },
+    {
+      "sample_id": 97,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000473182.jpg",
+      "reference": "the deteriorating roof of the gymnasium .",
+      "prediction": "the building is a modernist structure with a large open floor plan.",
+      "judge": {
+        "accuracy": 2,
+        "detail": 2,
+        "relevance": 3,
+        "fluency": 5,
+        "overall": 3,
+        "reason": "候选描述提到的现代主义建筑和开放平面布局缺乏图像支持，屋顶破损等关键细节未提及，语言流畅但内容不准确",
+        "_raw": "{\"accuracy\": 2, \"detail\": 2, \"relevance\": 3, \"fluency\": 5, \"overall\": 3, \"reason\": \"候选描述提到的现代主义建筑和开放平面布局缺乏图像支持，屋顶破损等关键细节未提及，语言流畅但内容不准确\"}"
+      }
+    },
+    {
+      "sample_id": 98,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_001916649.jpg",
+      "reference": "police forces guard the entrance following friday 's incident on a tube .",
+      "prediction": "police officers are seen patrolling the streets of the city",
+      "judge": {
+        "accuracy": 2,
+        "detail": 2,
+        "relevance": 3,
+        "fluency": 5,
+        "overall": 3,
+        "reason": "候选描述与图片内容不完全一致，图片中警察并非在巡逻街道，而是在建筑物入口处执勤，且未体现具体地点和事件背景",
+        "_raw": "{\"accuracy\": 2, \"detail\": 2, \"relevance\": 3, \"fluency\": 5, \"overall\": 3, \"reason\": \"候选描述与图片内容不完全一致，图片中警察并非在巡逻街道，而是在建筑物入口处执勤，且未体现具体地点和事件背景\"}"
+      }
+    },
+    {
+      "sample_id": 99,
+      "image_path": "./data/llava_cc3m_raw/images/GCC_train_000355782.jpg",
+      "reference": "then : an estimated percent of the materials used were recycled into its recent remodel .",
+      "prediction": "the interior of the building, which was built in 1920.",
+      "judge": {
+        "accuracy": 2,
+        "detail": 2,
+        "relevance": 3,
+        "fluency": 5,
+        "overall": 3,
+        "reason": "候选描述提到建筑建于1920年，但图片中无法验证此信息，且未提及关键视觉元素如树干状柱子和螺旋楼梯，细节不足",
+        "_raw": "{\"accuracy\": 2, \"detail\": 2, \"relevance\": 3, \"fluency\": 5, \"overall\": 3, \"reason\": \"候选描述提到建筑建于1920年，但图片中无法验证此信息，且未提及关键视觉元素如树干状柱子和螺旋楼梯，细节不足\"}"
+      }
+    }
+  ]
+}

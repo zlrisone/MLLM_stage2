@@ -1,0 +1,87 @@
+# limit_batches 7 batch_size 16 共7*16=112个样本
+
+## best_checkpoint
+{'testlen': 815, 'reflen': 1132, 'guess': [815, 719, 623, 527], 'correct': [269, 72, 23, 8]}                                                                                  
+ratio: 0.719964664310318
+[Evaluation Results Saved] ./outputs/test_predictions.json
+[Test] | BLEU-1=0.2237 | BLEU-2=0.1232 | BLEU-3=0.0724 | BLEU-4=0.0445 | METEOR=0.0000 | ROUGE-L=0.2354 | CIDEr=0.6757
+
+## checkpoint-step-25000
+{'testlen': 833, 'reflen': 1132, 'guess': [833, 737, 641, 545], 'correct': [272, 78, 29, 12]}                                                                
+ratio: 0.7358657243809754
+[Evaluation Results Saved] ./outputs/test_predictions.json
+[Test] | BLEU-1=0.2281 | BLEU-2=0.1298 | BLEU-3=0.0811 | BLEU-4=0.0535 | METEOR=0.0000 | ROUGE-L=0.2401 | CIDEr=0.7148
+
+## checkpoint-step-20000
+{'testlen': 854, 'reflen': 1132, 'guess': [854, 758, 662, 566], 'correct': [269, 68, 22, 8]}                                                                 
+ratio: 0.7544169611300756
+[Evaluation Results Saved] ./outputs/test_predictions.json
+[Test] | BLEU-1=0.2275 | BLEU-2=0.1214 | BLEU-3=0.0707 | BLEU-4=0.0436 | METEOR=0.0000 | ROUGE-L=0.2307 | CIDEr=0.6143
+
+## checkpoint-step-15000
+'testlen': 914, 'reflen': 1132, 'guess': [914, 818, 722, 626], 'correct': [272, 69, 25, 10]}                                                                
+ratio: 0.8074204946989334
+[Evaluation Results Saved] ./outputs/test_predictions.json
+[Test] | BLEU-1=0.2344 | BLEU-2=0.1248 | BLEU-3=0.0752 | BLEU-4=0.0481 | METEOR=0.0000 | ROUGE-L=0.2348 | CIDEr=0.6158
+
+## checkpoint-step-10000
+{'testlen': 835, 'reflen': 1132, 'guess': [835, 739, 643, 547], 'correct': [249, 55, 15, 5]}                                                                 
+ratio: 0.7376325088332707
+[Evaluation Results Saved] ./outputs/test_predictions.json
+[Test] | BLEU-1=0.2089 | BLEU-2=0.1044 | BLEU-3=0.0563 | BLEU-4=0.0327 | METEOR=0.0000 | ROUGE-L=0.2187 | CIDEr=0.5502
+
+# full test
+
+## best_checkpoint
+{'testlen': 545069, 'reflen': 694727, 'guess': [545069, 485531, 425993, 366457], 'correct': [174498, 51135, 22144, 11766]}                             
+ratio: 0.7845801300366895
+[Evaluation Results Saved] ./outputs/best-test_predictions.json
+[Test] | BLEU-1=0.2433 | BLEU-2=0.1395 | BLEU-3=0.0916 | BLEU-4=0.0658 | METEOR=0.0000 | ROUGE-L=0.2487 | CIDEr=0.6568
+
+## checkpoint-step-25000
+{'testlen': 552896, 'reflen': 694727, 'guess': [552896, 493358, 433820, 374283], 'correct': [175709, 51185, 21969, 11530]}                                   
+ratio: 0.7958464260061854
+[Evaluation Results Saved] ./outputs/test_predictions.json
+[Test] | BLEU-1=0.2459 | BLEU-2=0.1405 | BLEU-3=0.0918 | BLEU-4=0.0655 | METEOR=0.0000 | ROUGE-L=0.2483 | CIDEr=0.6515
+
+## checkpoint-step-20000
+{'testlen': 542720, 'reflen': 694727, 'guess': [542720, 483182, 423644, 364106], 'correct': [171517, 48483, 20036, 10190]}                                   
+ratio: 0.7811989457729427
+[Evaluation Results Saved] ./outputs/checkpoint-step-20000-test_predictions.json
+[Test] | BLEU-1=0.2388 | BLEU-2=0.1346 | BLEU-3=0.0865 | BLEU-4=0.0608 | METEOR=0.0000 | ROUGE-L=0.2437 | CIDEr=0.6187
+
+# Qwen-Vl-max as a Judge 样本数100
+
+## best_checkpoint
+[Judge Done] model=qwen-vl-max  n=100  errors=0
+  accuracy : 2.970  (valid=100)
+  detail   : 2.330  (valid=100)
+  relevance: 3.610  (valid=100)
+  fluency  : 4.740  (valid=100)
+  overall  : 3.100  (valid=100)
+Saved -> outputs/best-checkpoint-judge_results.json
+
+## checkpoint-step-25000
+[Judge Done] model=qwen-vl-max  n=100  errors=0
+  accuracy : 2.900  (valid=100)
+  detail   : 2.300  (valid=100)
+  relevance: 3.610  (valid=100)
+  fluency  : 4.820  (valid=100)
+  overall  : 3.090  (valid=100)
+Saved -> outputs/checkpoint-step-25000-judge_results.json
+
+# HF LLaVA 基线（eval_llava.py，见 评测命令.txt）
+
+## llava-onevision-qwen2-0.5b-ov-hf
+model=llava-hf/llava-onevision-qwen2-0.5b-ov-hf batch_size=64 num_workers=4 amp_dtype=torch.float16 load_dtype=torch.float16 limit_batches=10
+[LLaVA Test] | BLEU-1=0.1774 | BLEU-2=0.0754 | BLEU-3=0.0321 | BLEU-4=0.0149 | METEOR=0.1421 | ROUGE-L=0.1528 | CIDEr=0.2655
+[Evaluation Results Saved] ./outputs/llava_test_predictions.json
+
+## llava-1.5-7b-hf（limit_batches=10, batch_size=1）
+[LLaVA Test] | BLEU-1=0.0658 | BLEU-2=0.0297 | BLEU-3=0.0127 | BLEU-4=0.0000 | METEOR=0.1548 | ROUGE-L=0.1021 | CIDEr=0.0006
+
+## llava-1.5-7b-hf（limit_batches=50, batch_size=2）
+[LLaVA Test] | BLEU-1=0.0734 | BLEU-2=0.0331 | BLEU-3=0.0139 | BLEU-4=0.0070 | METEOR=0.1474 | ROUGE-L=0.1065 | CIDEr=0.0099
+
+#（以下为 评测命令.txt 中与自训模型同列的「全量 test / best」记录，数值与上文 # full test 接近，备查）
+# [Test] | BLEU-1=0.2432 | ... | 见 评测命令.txt 第 58–63 行
